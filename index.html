@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김찬영 — Bio × AI Engineer</title>
+<meta name="description" content="생화학 석사 · CAR-T 연구원 · AI 풀스택 개발자. 실험실 데이터를 직접 만들어본 사람이 AI 파이프라인을 설계합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c14;
+  --bg2: #0d1220;
+  --bg3: #111827;
+  --surface: #141e30;
+  --surface2: #1a2540;
+  --accent: #4af4c2;
+  --accent2: #7c6af0;
+  --accent3: #f06a6a;
+  --text: #e8edf5;
+  --text2: #8b95a8;
+  --text3: #555f72;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --glow: rgba(74,244,194,0.15);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── 노이즈 텍스처 오버레이 */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; opacity: 0.4;
+}
+
+/* ── NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 60px;
+  background: rgba(8,12,20,0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.logo {
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--accent);
+}
+.logo span { color: var(--text2); font-weight: 400; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 300;
+  color: var(--text2); text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  font-family: var(--font-mono); font-size: 12px;
+  background: transparent; border: 1px solid var(--accent);
+  color: var(--accent); padding: 8px 20px; border-radius: 4px;
+  cursor: pointer; text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.nav-cta:hover { background: var(--accent); color: var(--bg); }
+
+/* ── HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 60px 80px;
+  position: relative;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: -1; overflow: hidden;
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+}
+.orb1 { width: 600px; height: 600px; background: var(--accent); top: -100px; right: -100px; animation: orb-drift 12s ease-in-out infinite; }
+.orb2 { width: 400px; height: 400px; background: var(--accent2); bottom: -50px; left: 200px; animation: orb-drift 16s ease-in-out infinite reverse; }
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -20px); }
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 420px;
+  gap: 80px; align-items: center;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 300;
+  color: var(--accent); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--accent); }
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 800; line-height: 1.0;
+  letter-spacing: -2.5px;
+  margin-bottom: 24px;
+}
+h1 .name-ko { display: block; color: var(--text); }
+h1 .name-en { display: block; color: var(--text3); font-weight: 600; font-size: 0.55em; letter-spacing: -1px; }
+.hero-role {
+  font-size: 18px; font-weight: 300; color: var(--text2);
+  margin-bottom: 32px; line-height: 1.7;
+}
+.hero-role strong { color: var(--text); font-weight: 500; }
+.hero-role .sep { color: var(--accent); margin: 0 8px; }
+.hero-desc {
+  font-size: 15px; color: var(--text2); line-height: 1.8;
+  max-width: 480px; margin-bottom: 40px;
+  padding-left: 16px;
+  border-left: 2px solid var(--surface2);
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: var(--bg);
+  font-family: var(--font-mono); font-size: 13px; font-weight: 400;
+  padding: 12px 28px; border-radius: 4px; text-decoration: none;
+  transition: opacity .2s, transform .2s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border2);
+  font-family: var(--font-mono); font-size: 13px;
+  padding: 12px 28px; border-radius: 4px; text-decoration: none;
+  transition: border-color .2s, color .2s, transform .2s;
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.stat-row {
+  display: flex; gap: 32px;
+}
+.stat { }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 700;
+  color: var(--accent); line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label { font-size: 12px; color: var(--text3); font-family: var(--font-mono); }
+
+/* 히어로 우측 카드 */
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px;
+  position: relative; overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.card-section { margin-bottom: 28px; }
+.card-section:last-child { margin-bottom: 0; }
+.card-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text3); margin-bottom: 12px;
+}
+.pill-group { display: flex; flex-wrap: wrap; gap: 7px; }
+.pill {
+  font-family: var(--font-mono); font-size: 11px;
+  padding: 4px 12px; border-radius: 99px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.pill.green { border-color: rgba(74,244,194,0.25); color: var(--accent); background: rgba(74,244,194,0.06); }
+.pill.purple { border-color: rgba(124,106,240,0.25); color: var(--accent2); background: rgba(124,106,240,0.06); }
+.pill.red { border-color: rgba(240,106,106,0.25); color: var(--accent3); background: rgba(240,106,106,0.06); }
+.paper-mini {
+  background: var(--surface2); border-radius: 8px; padding: 12px;
+  border: 1px solid var(--border);
+}
+.paper-mini-journal {
+  font-family: var(--font-mono); font-size: 10px; color: var(--accent);
+  margin-bottom: 4px; letter-spacing: 0.5px;
+}
+.paper-mini-title {
+  font-size: 12px; line-height: 1.5; color: var(--text);
+}
+.available-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(74,244,194,0.08); border: 1px solid rgba(74,244,194,0.2);
+  border-radius: 99px; padding: 6px 14px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--accent);
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+
+/* ── SECTIONS 공통 */
+section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+.section-header { margin-bottom: 60px; }
+.section-eye {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-eye::before { content: '//'; color: var(--text3); }
+h2.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800; letter-spacing: -1.5px;
+  color: var(--text); line-height: 1.1;
+}
+.section-sub { font-size: 15px; color: var(--text2); margin-top: 12px; }
+
+/* ── PROJECTS */
+.project-hero {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 48px;
+  position: relative; overflow: hidden;
+  margin-bottom: 20px;
+  transition: border-color .3s, transform .3s;
+  text-decoration: none; display: block; color: inherit;
+}
+.project-hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(74,244,194,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.project-hero:hover { border-color: rgba(74,244,194,0.25); transform: translateY(-4px); }
+.proj-number {
+  font-family: var(--font-display); font-size: 80px; font-weight: 800;
+  color: var(--surface2); position: absolute; top: 24px; right: 40px;
+  line-height: 1; user-select: none; z-index: 0;
+}
+.proj-content { position: relative; z-index: 1; }
+.proj-type {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--accent); letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.proj-title {
+  font-family: var(--font-display);
+  font-size: 32px; font-weight: 700;
+  letter-spacing: -1px; margin-bottom: 8px; color: var(--text);
+}
+.proj-tagline { font-size: 15px; color: var(--text2); margin-bottom: 28px; }
+.feat-list {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 28px;
+}
+.feat {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--text2); line-height: 1.5;
+}
+.feat-bullet {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(74,244,194,0.12); border: 1px solid rgba(74,244,194,0.25);
+  flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+}
+.feat-bullet::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent);
+}
+.tech-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.tech {
+  font-family: var(--font-mono); font-size: 11px;
+  padding: 3px 10px; border-radius: 4px;
+  background: var(--surface2); color: var(--text2);
+  border: 1px solid var(--border);
+}
+.proj-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--accent); text-decoration: none; margin-top: 20px;
+  transition: gap .2s;
+}
+.proj-link:hover { gap: 10px; }
+
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.proj-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px;
+  transition: border-color .25s, transform .25s;
+  text-decoration: none; color: inherit; display: block;
+}
+.proj-card:hover { border-color: rgba(124,106,240,0.3); transform: translateY(-3px); }
+.proj-card .proj-type { color: var(--accent2); }
+.proj-card .proj-title { font-size: 20px; margin-bottom: 6px; }
+.proj-card .proj-tagline { font-size: 13px; margin-bottom: 16px; }
+
+/* ── EXPERIENCE */
+.exp-container { display: grid; grid-template-columns: 220px 1fr; gap: 60px; }
+.exp-nav { position: sticky; top: 100px; align-self: start; }
+.exp-nav-item {
+  display: block; padding: 10px 0;
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--text3); text-decoration: none;
+  border-left: 2px solid var(--border);
+  padding-left: 16px; margin-bottom: 4px;
+  transition: color .2s, border-color .2s;
+  cursor: pointer;
+}
+.exp-nav-item:hover, .exp-nav-item.active {
+  color: var(--accent); border-color: var(--accent);
+}
+.exp-items { }
+.exp-item {
+  padding-bottom: 60px; border-bottom: 1px solid var(--border);
+  margin-bottom: 60px;
+}
+.exp-item:last-child { border-bottom: none; margin-bottom: 0; }
+.exp-period {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--text3); margin-bottom: 8px; letter-spacing: 0.5px;
+}
+.exp-title {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 700;
+  letter-spacing: -0.5px; margin-bottom: 4px;
+}
+.exp-company { font-size: 14px; color: var(--accent); margin-bottom: 20px; }
+.exp-desc {
+  font-size: 14px; color: var(--text2); line-height: 1.8;
+  margin-bottom: 20px;
+}
+.exp-bullets { list-style: none; margin-bottom: 20px; }
+.exp-bullets li {
+  font-size: 14px; color: var(--text2); line-height: 1.7;
+  padding-left: 20px; position: relative; margin-bottom: 6px;
+}
+.exp-bullets li::before {
+  content: '→';
+  position: absolute; left: 0;
+  color: var(--accent); font-size: 12px;
+}
+.exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.exp-tag {
+  font-family: var(--font-mono); font-size: 10px;
+  padding: 3px 10px; border-radius: 4px;
+  background: rgba(74,244,194,0.06);
+  border: 1px solid rgba(74,244,194,0.15);
+  color: var(--accent);
+}
+.exp-tag.purple {
+  background: rgba(124,106,240,0.06);
+  border-color: rgba(124,106,240,0.15);
+  color: var(--accent2);
+}
+.exp-tag.muted {
+  background: var(--surface2);
+  border-color: var(--border);
+  color: var(--text2);
+}
+
+/* ── PAPER */
+.paper-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 40px;
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 32px; align-items: start;
+  transition: border-color .25s;
+}
+.paper-card:hover { border-color: rgba(74,244,194,0.25); }
+.paper-year-block {
+  writing-mode: vertical-rl; text-orientation: mixed;
+  font-family: var(--font-display); font-size: 64px; font-weight: 800;
+  color: var(--surface2); line-height: 1; user-select: none;
+  transform: rotate(180deg);
+}
+.paper-journal-name {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--accent); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.paper-title {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 700;
+  letter-spacing: -0.5px; line-height: 1.3;
+  margin-bottom: 8px;
+}
+.paper-authors {
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--text2); margin-bottom: 20px;
+}
+.paper-authors strong { color: var(--accent); }
+.paper-abstract {
+  font-size: 14px; color: var(--text2); line-height: 1.8;
+  margin-bottom: 24px;
+  padding: 16px; background: var(--surface2); border-radius: 8px;
+  border-left: 3px solid var(--accent);
+}
+.paper-findings { list-style: none; margin-bottom: 24px; }
+.paper-findings li {
+  font-size: 13px; color: var(--text2); line-height: 1.7;
+  padding-left: 20px; position: relative; margin-bottom: 8px;
+}
+.paper-findings li::before {
+  content: '◆'; position: absolute; left: 0;
+  color: var(--accent); font-size: 8px; top: 5px;
+}
+.paper-doi {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--text3); text-decoration: none;
+  border: 1px solid var(--border); padding: 8px 16px; border-radius: 4px;
+  transition: color .2s, border-color .2s;
+}
+.paper-doi:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── SKILLS */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.skill-block {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px;
+}
+.skill-block-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.skill-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.skill-block-title {
+  font-family: var(--font-display); font-size: 15px; font-weight: 700;
+}
+.skill-items { display: flex; flex-direction: column; gap: 10px; }
+.skill-row { }
+.skill-name { font-size: 13px; color: var(--text2); margin-bottom: 5px; display: flex; justify-content: space-between; }
+.skill-bar-bg {
+  height: 3px; background: var(--surface2); border-radius: 99px; overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 1s ease;
+}
+
+/* ── CONTACT */
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.contact-left h3 {
+  font-family: var(--font-display); font-size: 28px; font-weight: 700;
+  letter-spacing: -0.5px; margin-bottom: 16px;
+}
+.contact-left p { font-size: 15px; color: var(--text2); line-height: 1.8; margin-bottom: 32px; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 20px;
+  text-decoration: none; color: inherit;
+  transition: border-color .2s, transform .2s;
+}
+.contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+.contact-link-icon {
+  width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.contact-link-info { }
+.contact-link-label { font-family: var(--font-mono); font-size: 10px; color: var(--text3); margin-bottom: 2px; }
+.contact-link-value { font-size: 14px; font-weight: 500; }
+.contact-right {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 32px;
+}
+.contact-right h4 {
+  font-family: var(--font-display); font-size: 18px; font-weight: 700;
+  margin-bottom: 20px;
+}
+.timeline-mini { }
+.tl-mini-item {
+  display: flex; gap: 16px; margin-bottom: 20px;
+}
+.tl-mini-left {
+  display: flex; flex-direction: column; align-items: center;
+}
+.tl-mini-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent); margin-top: 5px;
+}
+.tl-mini-line { flex: 1; width: 1px; background: var(--border); margin-top: 4px; }
+.tl-mini-content { padding-bottom: 4px; }
+.tl-mini-period { font-family: var(--font-mono); font-size: 10px; color: var(--text3); margin-bottom: 2px; }
+.tl-mini-role { font-size: 13px; font-weight: 500; margin-bottom: 1px; }
+.tl-mini-org { font-size: 12px; color: var(--accent); }
+
+/* ── FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo {
+  font-family: var(--font-display); font-size: 16px; font-weight: 800;
+  color: var(--accent);
+}
+.footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--text3); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--text3); text-decoration: none;
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* ── SCROLL ANIMATIONS */
+.fade-up {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-up.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  section { padding: 60px 24px; }
+  .exp-container { grid-template-columns: 1fr; }
+  .exp-nav { display: none; }
+  .feat-list { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .paper-card { grid-template-columns: 1fr; }
+  .paper-year-block { display: none; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">CY<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#research">research</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <a href="mailto:kcy960812@gmail.com" class="nav-cta">get in touch</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-bg">
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+  </div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        Bio × AI Engineer
+      </div>
+      <h1>
+        <span class="name-ko">김찬영</span>
+        <span class="name-en">Chanyoung Kim</span>
+      </h1>
+      <div class="hero-role">
+        <strong>생화학 석사 · SCI 논문</strong><span class="sep">×</span>
+        <strong>CAR-T 연구원</strong><span class="sep">×</span>
+        <strong>AI 풀스택 개발</strong>
+      </div>
+      <p class="hero-desc">
+        실험실 벤치에서 데이터를 직접 생산해본 사람이 AI 파이프라인을 설계합니다.
+        헬스케어 도메인의 맥락을 이해하는 개발자가 만드는 서비스는 다릅니다.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">프로젝트 보기 →</a>
+        <a href="https://github.com/Chyoung812" target="_blank" class="btn-outline">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/%EC%B0%AC%EC%98%81-%EA%B9%80-ba470812b/" target="_blank" class="btn-outline">LinkedIn ↗</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">1</div>
+          <div class="stat-label">SCI 논문</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">바이오 경력 (년)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">풀스택 프로젝트</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-card fade-up">
+      <div class="card-section">
+        <div class="card-label">현재 상태</div>
+        <div class="available-badge">
+          <span class="badge-dot"></span>
+          취업 준비 중 · 2026.06 수료 예정
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-label">바이오 역량</div>
+        <div class="pill-group">
+          <span class="pill green">CAR-T 제조</span>
+          <span class="pill green">FACS/Flow</span>
+          <span class="pill green">Viral Vector</span>
+          <span class="pill green">ELISA · qPCR</span>
+          <span class="pill green">Cell Culture</span>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-label">개발 역량</div>
+        <div class="pill-group">
+          <span class="pill purple">Python · FastAPI</span>
+          <span class="pill purple">Next.js</span>
+          <span class="pill purple">Docker</span>
+          <span class="pill purple">OpenAI API</span>
+          <span class="pill purple">SQLite · Pandas</span>
+        </div>
+      </div>
+      <div class="card-section">
+        <div class="card-label">대표 논문</div>
+        <div class="paper-mini">
+          <div class="paper-mini-journal">Dev &amp; Reprod · 2023 · SCI(E)</div>
+          <div class="paper-mini-title">Ruvbl1 is Essential for Ciliary Beating during <em>Xenopus laevis</em> Embryogenesis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-up">
+    <div class="section-eye">Projects</div>
+    <h2 class="section-title">직접 만든 것들</h2>
+    <p class="section-sub">기획부터 배포까지, 도메인 이해가 설계를 바꿉니다.</p>
+  </div>
+
+  <a href="https://github.com/Chyoung812/boyak" target="_blank" class="project-hero fade-up">
+    <div class="proj-number">01</div>
+    <div class="proj-content">
+      <div class="proj-type">헬스케어 AI · Fullstack</div>
+      <div class="proj-title">보약 (Boyak) 💊</div>
+      <div class="proj-tagline">독거 어르신의 3가지 두려움 — 약물 부작용 · 병원비 · 이동 장벽 — 을 AI로 해결하는 서비스</div>
+      <div class="feat-list">
+        <div class="feat"><div class="feat-bullet"></div><div>GPT-4o-mini 약봉투 OCR → 심평원 DUR 공공데이터 약물 안전성 분석 파이프라인</div></div>
+        <div class="feat"><div class="feat-bullet"></div><div>TMap 무장애 보행 경로 + 계단 수 최소화 알고리즘 병원 길찾기</div></div>
+        <div class="feat"><div class="feat-bullet"></div><div>GPS 실시간 추적, TTS 음성 안내, 20m 도착 감지</div></div>
+        <div class="feat"><div class="feat-bullet"></div><div>Docker Compose + Render 클라우드 배포 · 운영 중</div></div>
+      </div>
+      <div class="tech-stack">
+        <span class="tech">Python</span><span class="tech">FastAPI</span><span class="tech">Next.js</span>
+        <span class="tech">SQLite</span><span class="tech">Docker</span><span class="tech">OpenAI API</span>
+        <span class="tech">TMap API</span><span class="tech">심평원 공공데이터</span><span class="tech">Render</span>
+      </div>
+      <span class="proj-link">GitHub 보기 →</span>
+    </div>
+  </a>
+
+  <div class="proj-grid fade-up">
+    <a href="https://github.com/Chyoung812/SKN25-4th" target="_blank" class="proj-card">
+      <div class="proj-number" style="font-size:48px;right:20px;top:16px">02</div>
+      <div class="proj-type">데이터 파이프라인 · AI 서비스</div>
+      <div class="proj-title">SKN25-4th</div>
+      <div class="proj-tagline">Airflow 기반 자동화 데이터 파이프라인 + FastAPI/Next.js 풀스택 AI 서비스</div>
+      <div class="tech-stack" style="margin-top:16px">
+        <span class="tech">Python</span><span class="tech">Airflow</span>
+        <span class="tech">TypeScript</span><span class="tech">Docker Compose</span>
+      </div>
+      <span class="proj-link" style="margin-top:14px">GitHub →</span>
+    </a>
+    <div class="proj-card" style="cursor:default">
+      <div class="proj-number" style="font-size:48px;right:20px;top:16px;color:var(--surface2)">03</div>
+      <div class="proj-type" style="color:var(--accent)">석사 연구 프로젝트</div>
+      <div class="proj-title">Ruvbl1 연구 🔬</div>
+      <div class="proj-tagline">Xenopus laevis 모델에서 Ruvbl1의 섬모 운동 조절 역할 최초 규명. SCI 학술지 게재.</div>
+      <div class="tech-stack" style="margin-top:16px">
+        <span class="tech">Morpholino KD</span><span class="tech">WISH</span>
+        <span class="tech">공초점 현미경</span><span class="tech">GraphPad Prism</span>
+      </div>
+      <a href="https://doi.org/10.12717/DR.2023.27.3.159" target="_blank" class="proj-link" style="margin-top:14px">논문 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="max-width:1100px">
+  <div class="section-header fade-up">
+    <div class="section-eye">Experience</div>
+    <h2 class="section-title">경력</h2>
+  </div>
+  <div class="exp-container">
+    <div class="exp-nav">
+      <a class="exp-nav-item active" onclick="scrollTo(document.getElementById('exp1'))">SK AI 캠프</a>
+      <a class="exp-nav-item" onclick="scrollTo(document.getElementById('exp2'))">다인바이오</a>
+      <a class="exp-nav-item" onclick="scrollTo(document.getElementById('exp3'))">티카로스</a>
+      <a class="exp-nav-item" onclick="scrollTo(document.getElementById('exp4'))">경북대 대학원</a>
+    </div>
+    <div class="exp-items">
+      <div class="exp-item fade-up" id="exp1">
+        <div class="exp-period">2025.12 — 2026.06</div>
+        <div class="exp-title">AI 엔지니어</div>
+        <div class="exp-company">SK네트웍스 패밀리 AI 캠프 (수료 예정)</div>
+        <ul class="exp-bullets">
+          <li>헬스케어 AI 서비스 <strong>보약(Boyak)</strong> — 기획·개발·배포 전 과정 주도</li>
+          <li>공공의료 데이터(심평원 DUR, TMap) 파이프라인 직접 설계 및 SQLite 인덱싱</li>
+          <li>FastAPI 백엔드 + Next.js 프론트엔드 + Docker Compose + Render 클라우드 운영</li>
+          <li>커스텀 API 로그 미들웨어 및 엔드포인트 자동 검증 스크립트 구현</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span><span class="exp-tag">FastAPI</span>
+          <span class="exp-tag">Next.js</span><span class="exp-tag">Docker</span>
+          <span class="exp-tag">OpenAI API</span><span class="exp-tag">LangChain</span>
+          <span class="exp-tag">PCCE Lv.1</span>
+        </div>
+      </div>
+      <div class="exp-item fade-up" id="exp2">
+        <div class="exp-period">2024.11 — 2025.09</div>
+        <div class="exp-title">전략기획팀 — 학술 지원 · 마케팅 전략</div>
+        <div class="exp-company">다인바이오</div>
+        <ul class="exp-bullets">
+          <li>ERP 데이터 기반 제품별 YoY 매출 추이 분석, 매출 저조 원인 진단 및 성장 전략 기획</li>
+          <li>Roche qPCR 장비 고객 학술 문의 대응, 프로토콜 최적화 및 현장 실습 교육</li>
+          <li>영업 파견 — 제품 시연 및 판매 실적 기여, 고객 신뢰 확보 → 재구매 유도</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag purple">YoY 분석</span><span class="exp-tag purple">마케팅 전략</span>
+          <span class="exp-tag purple">qPCR</span><span class="exp-tag purple">고객 교육</span>
+        </div>
+      </div>
+      <div class="exp-item fade-up" id="exp3">
+        <div class="exp-period">2022.07 — 2023.08</div>
+        <div class="exp-title">POC팀 연구원 — CAR-T 세포치료제</div>
+        <div class="exp-company">티카로스 (Ticaros)</div>
+        <ul class="exp-bullets">
+          <li>CAR-T 세포 제작 전주기 수행: Primer 설계 → Cloning → Viral vector 생산 → T cell 확장 배양</li>
+          <li>Human / Mouse CAR-T 이중 모델 제작 및 FACS 기반 CAR 발현율·순도 분석</li>
+          <li>Cytotoxicity assay · ELISA (사이토카인 분비량) 기능 효능 검증</li>
+          <li>NOD 마우스 종양 모델에서 CAR-T 항종양 효과 추적 관찰</li>
+          <li><strong>문제 해결:</strong> 벡터 효소 제한 부위 부족 → 클로닝 방식 비교 실험으로 최적 방법 자체 확립</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">CAR-T</span><span class="exp-tag">FACS/Flow Cytometry</span>
+          <span class="exp-tag">Viral Vector</span><span class="exp-tag">ELISA</span>
+          <span class="exp-tag">Cell Culture</span><span class="exp-tag">전임상</span>
+        </div>
+      </div>
+      <div class="exp-item fade-up" id="exp4">
+        <div class="exp-period">2020 — 2022</div>
+        <div class="exp-title">이학석사 — 생화학 (후생유전학 전공)</div>
+        <div class="exp-company">경북대학교 대학원 · GPA 4.2 / 4.3</div>
+        <ul class="exp-bullets">
+          <li>선행 자료 없는 비주류 모델(Xenopus)에서 프로토콜 자체 구축, 수십 회 반복 실험</li>
+          <li>Whole-mount in situ hybridization 전담 및 후배 교육, 신규 프로토콜 정립</li>
+          <li>논문 마감 직전 결과 불일치 → 대안 데이터로 방향 전환, 기한 내 완성</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Morpholino KD</span><span class="exp-tag">WISH</span>
+          <span class="exp-tag">공초점 현미경</span><span class="exp-tag">RT-PCR</span>
+          <span class="exp-tag">GraphPad Prism</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-header fade-up">
+    <div class="section-eye">Research</div>
+    <h2 class="section-title">학술 연구</h2>
+  </div>
+  <div class="paper-card fade-up">
+    <div class="paper-year-block">2023</div>
+    <div>
+      <div class="paper-journal-name">Development &amp; Reproduction · Vol. 27(3): 159-165</div>
+      <div class="paper-title">Ruvbl1 is Essential for Ciliary Beating during <em>Xenopus laevis</em> Embryogenesis</div>
+      <div class="paper-authors">
+        <strong>Kim CY*</strong>, Lee HK*, Lee H, Lee HS<br>
+        (*공동 제1저자 Co-first author) · DOI: 10.12717/DR.2023.27.3.159
+      </div>
+      <div class="paper-abstract">
+        Ruvbl1 단백질이 Xenopus laevis 배아 발생 과정에서 다섬모세포(multiciliated cells)의 섬모 운동에 필수적 역할을 한다는 것을 최초로 보고했습니다. ruvbl1 knockdown이 섬모의 수·길이·형태에는 영향을 주지 않으면서, basal body polarity(기저소체 극성)를 선택적으로 교란하여 섬모 구동 유체 흐름을 현저히 감소시킴을 규명했습니다.
+      </div>
+      <ul class="paper-findings">
+        <li>Morpholino 기반 ruvbl1 knockdown으로 섬모 구동 유체 흐름 현저히 감소 입증 (p&lt;0.0001)</li>
+        <li>ruvbl1 결손이 섬모 수·형태가 아닌 <strong>basal body polarity만 선택적으로 교란</strong>함을 최초 규명</li>
+        <li>centrin-RFP · clamp-GFP mRNA 동시 주입으로 basal body 극성 시각화</li>
+        <li>Ruvbl1의 섬모 운동 조절 신규 기능 제안: axonemal dynein assembly 및 basal body 극성 정렬 관여 가능성</li>
+      </ul>
+      <a href="https://doi.org/10.12717/DR.2023.27.3.159" target="_blank" class="paper-doi">
+        DOI: 10.12717/DR.2023.27.3.159 ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-up">
+    <div class="section-eye">Contact</div>
+    <h2 class="section-title">함께 일하고 싶다면</h2>
+  </div>
+  <div class="contact-layout fade-up">
+    <div class="contact-left">
+      <h3>바이오 × AI,<br>두 세계를 잇습니다.</h3>
+      <p>헬스케어·제약·디지털헬스 분야에서 도메인 이해와 개발 역량을 동시에 필요로 하는 팀이라면 기여할 수 있습니다. 커피챗도 환영합니다.</p>
+      <div class="contact-links">
+        <a href="mailto:kcy960812@gmail.com" class="contact-link">
+          <div class="contact-link-icon" style="background:rgba(240,106,106,0.1)">✉️</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">EMAIL</div>
+            <div class="contact-link-value">kcy960812@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://github.com/Chyoung812" target="_blank" class="contact-link">
+          <div class="contact-link-icon" style="background:rgba(255,255,255,0.05)">🐙</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">GITHUB</div>
+            <div class="contact-link-value">github.com/Chyoung812</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/%EC%B0%AC%EC%98%81-%EA%B9%80-ba470812b/" target="_blank" class="contact-link">
+          <div class="contact-link-icon" style="background:rgba(10,102,194,0.12)">💼</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">LINKEDIN</div>
+            <div class="contact-link-value">linkedin.com/in/찬영-김</div>
+          </div>
+        </a>
+        <a href="https://doi.org/10.12717/DR.2023.27.3.159" target="_blank" class="contact-link">
+          <div class="contact-link-icon" style="background:rgba(74,244,194,0.08)">📄</div>
+          <div class="contact-link-info">
+            <div class="contact-link-label">PUBLICATION</div>
+            <div class="contact-link-value">Dev &amp; Reprod 2023 · SCI(E)</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <h4>커리어 타임라인</h4>
+      <div class="timeline-mini">
+        <div class="tl-mini-item">
+          <div class="tl-mini-left"><div class="tl-mini-dot"></div><div class="tl-mini-line"></div></div>
+          <div class="tl-mini-content">
+            <div class="tl-mini-period">2025.12 – 2026.06</div>
+            <div class="tl-mini-role">AI 엔지니어 (부트캠프)</div>
+            <div class="tl-mini-org">SK네트웍스 AI 캠프</div>
+          </div>
+        </div>
+        <div class="tl-mini-item">
+          <div class="tl-mini-left"><div class="tl-mini-dot" style="background:var(--accent2)"></div><div class="tl-mini-line"></div></div>
+          <div class="tl-mini-content">
+            <div class="tl-mini-period">2024.11 – 2025.09</div>
+            <div class="tl-mini-role">전략기획팀 학술 지원</div>
+            <div class="tl-mini-org">다인바이오</div>
+          </div>
+        </div>
+        <div class="tl-mini-item">
+          <div class="tl-mini-left"><div class="tl-mini-dot" style="background:var(--accent2)"></div><div class="tl-mini-line"></div></div>
+          <div class="tl-mini-content">
+            <div class="tl-mini-period">2022.07 – 2023.08</div>
+            <div class="tl-mini-role">CAR-T 연구원 POC팀</div>
+            <div class="tl-mini-org">티카로스 (Ticaros)</div>
+          </div>
+        </div>
+        <div class="tl-mini-item">
+          <div class="tl-mini-left"><div class="tl-mini-dot" style="background:var(--text3)"></div></div>
+          <div class="tl-mini-content">
+            <div class="tl-mini-period">2020 – 2022</div>
+            <div class="tl-mini-role">이학석사 GPA 4.2/4.3</div>
+            <div class="tl-mini-org">경북대학교 대학원 생화학</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">CY.</div>
+  <div class="footer-copy">© 2026 김찬영 (Chanyoung Kim). Built with HTML + 🧬</div>
+  <div class="footer-links">
+    <a href="https://github.com/Chyoung812" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/%EC%B0%AC%EC%98%81-%EA%B9%80-ba470812b/" target="_blank">LinkedIn</a>
+    <a href="mailto:kcy960812@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+const navItems = document.querySelectorAll('.exp-nav-item');
+function scrollTo(el) {
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>

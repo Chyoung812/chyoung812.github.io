@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김찬영 이력서 — Bio × AI Engineer</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+:root {
+  --accent: #2563EB;
+  --title: #111827;
+  --body: #374151;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --bg-sub: #F9FAFB;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  color: var(--body);
+  line-height: 1.55;
+  background: #F3F4F6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A4 페이지 */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 20px auto;
+  padding: 18mm 16mm;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+/* 헤더 */
+header { border-bottom: 2px solid var(--title); padding-bottom: 14px; margin-bottom: 22px; }
+header h1 { font-size: 26px; font-weight: 800; color: var(--title); letter-spacing: -0.5px; }
+header .role { font-size: 15px; color: var(--accent); font-weight: 600; margin-top: 2px; }
+header .contact {
+  margin-top: 10px; font-size: 12.5px; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 16px;
+}
+header .contact a { color: var(--muted); text-decoration: none; }
+
+/* 한 줄 소개 */
+.summary {
+  font-size: 13px; color: var(--body); line-height: 1.7;
+  background: var(--bg-sub); padding: 14px 16px; border-radius: 8px;
+  border-left: 3px solid var(--accent); margin-bottom: 24px;
+}
+
+/* 섹션 */
+section { margin-bottom: 22px; }
+.sec-title {
+  font-size: 14px; font-weight: 700; color: var(--title);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 12px;
+}
+
+/* 스킬 */
+.skills { display: grid; grid-template-columns: 110px 1fr; gap: 6px 12px; font-size: 12.5px; }
+.skills dt { font-weight: 700; color: var(--title); }
+.skills dd { color: var(--body); }
+
+/* 항목 (경력/프로젝트/학력) */
+.item { margin-bottom: 15px; }
+.item:last-child { margin-bottom: 0; }
+.item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.item-head h3 { font-size: 13.5px; font-weight: 700; color: var(--title); }
+.item-head .period { font-size: 11.5px; color: var(--muted); font-weight: 500; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.item .org { font-size: 12.5px; color: var(--accent); font-weight: 600; margin-top: 1px; }
+.item ul { list-style: none; margin-top: 6px; }
+.item li {
+  font-size: 12.5px; color: var(--body); padding-left: 13px; position: relative; margin-bottom: 3px;
+}
+.item li::before { content: '•'; position: absolute; left: 2px; color: var(--accent); }
+.item .tech { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+.item .tech b { color: var(--title); font-weight: 600; }
+
+/* 인쇄 */
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; width: auto; min-height: auto; padding: 14mm 14mm; }
+  @page { size: A4; margin: 0; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>김찬영 <span style="font-size:15px;font-weight:600;color:var(--muted);">(Chanyoung Kim)</span></h1>
+    <div class="role">Bio × AI Engineer</div>
+    <div class="contact">
+      <a href="mailto:kcy960812@gmail.com">kcy960812@gmail.com</a>
+      <a href="https://github.com/Chyoung812" target="_blank">github.com/Chyoung812</a>
+      <a href="https://www.linkedin.com/in/%EC%B0%AC%EC%98%81-%EA%B9%80-ba470812b/" target="_blank">LinkedIn</a>
+      <a href="https://chyoung812.github.io/" target="_blank">Portfolio</a>
+    </div>
+  </header>
+
+  <p class="summary">
+    생화학 석사 및 CAR-T 세포치료제 연구원 출신의 <b>Bio × AI 풀스택 엔지니어</b>입니다.
+    실험실에서 직접 데이터를 생산·분석한 경험을 바탕으로, 헬스케어 도메인의 맥락을 깊이 이해하는
+    AI 파이프라인과 서비스를 설계·구축합니다. 도메인 지식과 엔지니어링 역량을 결합해
+    의료·바이오 분야의 실질적 문제를 푸는 것을 지향합니다.
+  </p>
+
+  <section>
+    <div class="sec-title">Skills</div>
+    <dl class="skills">
+      <dt>AI / ML</dt>      <dd>PyTorch, LLM, RAG (LangChain, Chroma DB), Multi-Agent, OpenAI API</dd>
+      <dt>Backend</dt>      <dd>Python, FastAPI, PostgreSQL</dd>
+      <dt>Frontend</dt>     <dd>React, Next.js</dd>
+      <dt>Infra / Tools</dt><dd>Docker, AWS, Render, Vercel, Git, Streamlit</dd>
+      <dt>Domain</dt>       <dd>분자생물학, 세포치료제(CAR-T), 후생유전학, 바이오 데이터 분석</dd>
+    </dl>
+  </section>
+
+  <section>
+    <div class="sec-title">Experience</div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>AI 엔지니어 · SK네트웍스 패밀리 AI 캠프</h3>
+        <span class="period">2025.12 – 2026.06 (예정)</span>
+      </div>
+      <ul>
+        <li>PyTorch, LLM, Docker 기반 실무 프로젝트를 통해 AI 엔지니어링 역량 확보</li>
+        <li>생물학적 데이터를 해석하고 서비스화하는 AI 파이프라인 설계·구현</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>전략기획팀 학술 지원·마케팅 · 다인바이오</h3>
+        <span class="period">2024.11 – 2025.09</span>
+      </div>
+      <ul>
+        <li>Roche qPCR 장비 고객 학술 문의 대응 및 프로토콜 최적화 가이드 제공</li>
+        <li>제품별 판매 실적(YoY) 데이터 기반 시장 전략 수립</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>POC팀 연구원 · 티카로스 (Ticaros)</h3>
+        <span class="period">2022.07 – 2023.08</span>
+      </div>
+      <ul>
+        <li>CAR-T 세포치료제 전주기 파이프라인 수행 (Cloning, Viral vector 생산, T-cell Transduction)</li>
+        <li>FACS 기반 세포 품질 분석 및 동물 모델 효능 검증</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Projects</div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>MediPaw — 반려동물 응급도 분류·동물병원 자동화 플랫폼</h3>
+        <span class="period">팀 리드 · 진행 중</span>
+      </div>
+      <ul>
+        <li>팀장으로서 전체 일정·역할 분배·코드 통합 및 클라우드 배포 총괄</li>
+        <li>보호자용 Guardian Web 프론트엔드(AI 문진, 예약) 개발</li>
+        <li>바이오 도메인 지식 기반 Multi-Agent 응급도 분류 구조 설계</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> React · FastAPI · PostgreSQL · AWS</div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>보약 (Boyak) — 시니어 맞춤형 헬스케어 서비스</h3>
+        <span class="period">팀 리드 · 완료</span>
+      </div>
+      <ul>
+        <li>제12회 보건의료빅데이터 AI 활용 창업경진대회 출품작</li>
+        <li>프로젝트 아키텍처 설계 및 FastAPI/Next.js 배포 환경 구축</li>
+        <li>TMap 무장애 보행 경로 API 연동, 계단 수 최소화 길찾기 알고리즘 구현</li>
+        <li>약봉투 OCR + 심평원 DUR 공공데이터 연동 약물 안전성 분석</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> Python · Next.js · OpenAI API · Render &nbsp;|&nbsp; <b>Demo:</b> boyak-sable.vercel.app</div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>BioRAG — 건강 트렌드 질의응답 챗봇</h3>
+        <span class="period">RAG 시스템 구축</span>
+      </div>
+      <ul>
+        <li>LangChain + Chroma DB 기반 RAG 파이프라인 구축</li>
+        <li>문서 임베딩 및 벡터 검색 최적화로 답변 정확도 향상</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> LangChain · Chroma DB · LLM</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Research</div>
+    <div class="item">
+      <div class="item-head">
+        <h3>Ruvbl1 is Essential for Ciliary Beating during <i>Xenopus laevis</i> Embryogenesis</h3>
+        <span class="period">2023.09</span>
+      </div>
+      <div class="org">Development &amp; Reproduction (SCI(E))</div>
+      <ul>
+        <li>Chan Young Kim* 외 (*공동 1저자) — DOI: 10.12717/DR.2023.27.3.159</li>
+        <li>Ruvbl1 결손 시 기저소체 극성 교란으로 섬모 유체 흐름이 감소함을 세계 최초 규명</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Education</div>
+    <div class="item">
+      <div class="item-head">
+        <h3>경북대학교 대학원 · 생화학 석사 (후생유전학 전공)</h3>
+        <span class="period">2020.03 – 2022.02</span>
+      </div>
+      <ul>
+        <li>비주류 모델(<i>Xenopus laevis</i>) 독자적 실험 프로토콜 구축, 섬모 운동성 정량 분석 (GPA 4.2 / 4.3)</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

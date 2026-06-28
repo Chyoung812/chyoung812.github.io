@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MediPaw — 프로젝트 상세 · 김찬영</title>
+<meta name="description" content="LLM 멀티에이전트 동물병원 진료 워크플로우 자동화 플랫폼 MediPaw 프로젝트 상세. SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위." />
+<link rel="canonical" href="https://chyoung812.github.io/medipaw.html" />
+<meta property="og:title" content="MediPaw — LLM 멀티에이전트 동물병원 플랫폼 (최종 프로젝트 1위)" />
+<meta property="og:description" content="LangGraph 멀티에이전트 라우터 · RAG 문진 · LLMOps 평가 대시보드 · AWS CI/CD" />
+<meta property="og:image" content="https://chyoung812.github.io/images/medipaw/12c-chatbot-conversation.png" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{ --pine:#1f6f5c; --pine-dark:#14503f; --teal:#2f9e8b; --ink:#0f172a;
+    --slate:#475569; --line:#e2e8f0; --bg:#f7faf9; --card:#fff; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased;
+    word-break:keep-all;overflow-wrap:break-word}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(247,250,249,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+  nav .back{font-weight:700;color:var(--pine);font-size:15px}
+  nav .links{display:flex;gap:20px;font-size:14px;font-weight:600;color:var(--slate)}
+  nav .links a:hover{color:var(--pine)}
+  @media(max-width:680px){nav .links{display:none}}
+
+  .hero{padding:72px 0 56px;background:linear-gradient(160deg,#fff 0%,#eef6f3 100%);border-bottom:1px solid var(--line)}
+  .award{display:inline-block;background:#fffbeb;color:#b45309;border:1px solid #fde68a;
+    font-weight:800;font-size:13px;padding:7px 15px;border-radius:999px;margin-bottom:18px}
+  .hero h1{font-size:42px;line-height:1.2;font-weight:800;letter-spacing:-1px}
+  .hero h1 .accent{color:var(--pine)}
+  .hero .sub{margin-top:16px;font-size:18px;color:var(--slate);max-width:740px}
+  .hero .meta{margin-top:24px;display:flex;flex-wrap:wrap;gap:10px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--slate)}
+  .chip b{color:var(--pine)}
+  .cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:11px 20px;border-radius:11px;font-weight:700;font-size:14.5px;border:1px solid var(--pine)}
+  .btn.primary{background:var(--pine);color:#fff}
+  .btn.ghost{background:#fff;color:var(--pine)}
+  @media(max-width:680px){.hero h1{font-size:30px}}
+
+  section{padding:56px 0}
+  .eyebrow{color:var(--teal);font-weight:800;font-size:13px;letter-spacing:1.5px;text-transform:uppercase}
+  .h2{font-size:28px;font-weight:800;margin:8px 0 8px;letter-spacing:-.5px}
+  .lead{color:var(--slate);font-size:16px;max-width:760px;margin-bottom:28px}
+
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .metric{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px;text-align:center}
+  .metric .num{font-size:32px;font-weight:800;color:var(--pine);line-height:1}
+  .metric .lbl{margin-top:9px;font-size:13px;color:var(--slate);font-weight:600}
+  @media(max-width:680px){.metrics{grid-template-columns:repeat(2,1fr)}}
+
+  .arch{background:var(--ink);color:#e2e8f0;border-radius:16px;padding:26px;overflow:auto}
+  .arch pre{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.7;white-space:pre}
+  .tag{display:inline-block;background:#eef6f3;color:var(--pine);font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;margin:3px 4px 0 0}
+
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.2s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(20,80,63,.08)}
+  .card .k{font-size:12px;font-weight:800;color:var(--teal);letter-spacing:1px}
+  .card h3{font-size:18px;font-weight:800;margin:8px 0 10px}
+  .card ul{margin:10px 0 0 0;padding-left:18px;font-size:14px;color:var(--slate)}
+  .card ul li{margin-bottom:6px}
+  .role{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:999px;margin-left:7px;vertical-align:middle;letter-spacing:.3px}
+  .role.own{background:var(--pine);color:#fff}
+  .role.led{background:#eef6f3;color:var(--pine);border:1px solid #bfe3d8}
+  .role.ctb{background:#f1f5f9;color:#64748b;border:1px solid #e2e8f0}
+
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  th,td{padding:13px 18px;text-align:left;font-size:14.5px;border-bottom:1px solid var(--line)}
+  th{background:#f1f7f5;font-weight:700;color:var(--pine);font-size:13px}
+  td.before{color:#94a3b8}
+  td.after{color:var(--pine);font-weight:800}
+  tr:last-child td{border-bottom:none}
+
+  .galtitle{font-size:16px;font-weight:800;color:var(--ink);margin:32px 0 14px;padding-left:12px;border-left:4px solid var(--pine)}
+  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:760px){.shots{grid-template-columns:1fr}}
+  .shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;cursor:zoom-in}
+  .shot img{width:100%;height:240px;display:block;border-bottom:1px solid var(--line);
+    background:#fff;object-fit:cover;object-position:top center}
+  .shot .cap{padding:11px 15px;font-size:13.5px;font-weight:600;color:var(--slate)}
+  .shot .cap b{color:var(--ink)}
+  .shot .cap .hint{display:block;margin-top:2px;font-size:11.5px;font-weight:500;color:#94a3b8}
+  .shot.big{grid-column:span 2}
+  .shot.big img{height:380px}
+  @media(max-width:760px){.shot.big{grid-column:span 1}.shot img{height:200px}.shot.big img{height:240px}}
+
+  .lb{position:fixed;inset:0;background:rgba(15,23,42,.92);display:none;align-items:center;justify-content:center;z-index:100;padding:32px;cursor:zoom-out}
+  .lb.open{display:flex}
+  .lb img{max-width:100%;max-height:92vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+
+  footer{padding:44px 0;border-top:1px solid var(--line);color:var(--slate);font-size:14px;text-align:center}
+  .note{background:#fffbeb;border:1px solid #fde68a;color:#92400e;font-size:13px;padding:11px 15px;border-radius:10px;margin-top:16px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="back" href="index.html">← 포트폴리오</a>
+  <div class="links">
+    <a href="#problem">문제</a><a href="#arch">아키텍처</a><a href="#decision">결정</a><a href="#contrib">기여</a>
+    <a href="#eval">성과</a><a href="#shots">화면</a>
+    <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-FINAL-1Team" target="_blank">GitHub ↗</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="award">🏆 SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위</span>
+  <h1>MediPaw — LLM <span class="accent">멀티에이전트</span><br/>동물병원 워크플로우 자동화</h1>
+  <p class="sub">보호자 AI 상담 → 문진 → 예약 → 진료(EMR·처방) → 경과 관리까지 동물병원의 진료 워크플로우 전체를 자동화한 플랫폼. 보호자·수의사·운영자 3개 웹앱과 LangGraph 오케스트레이터, RAG 문진, AWS 자동 배포 파이프라인을 직접 설계·구현했습니다.</p>
+  <div class="meta">
+    <span class="chip"><b>김찬영</b> · 팀 리드 · Full Stack·AI·DevOps</span>
+    <span class="chip">커밋 <b>203 / 670</b> (1위, 30%)</span>
+    <span class="chip">약 <b>69,000</b> LOC</span>
+    <span class="chip">5인 · 2026.04 – 06.26</span>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="#shots">서비스 화면 보기</a>
+    <a class="btn ghost" href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-FINAL-1Team" target="_blank">GitHub Repo ↗</a>
+  </div>
+  <div class="note">⚠️ 라이브 데모(<span class="mono">*.medipaw.app</span>)는 캠프 종료로 곧 내려갑니다. 아래 화면은 종료 전 실제 서비스에서 캡처했습니다.</div>
+</div></header>
+
+<section id="loop" style="padding:36px 0 8px"><div class="wrap">
+  <video autoplay muted loop playsinline preload="metadata"
+    poster="images/medipaw/demo-poster.webp"
+    style="width:100%;border:1px solid var(--line);border-radius:16px;display:block;box-shadow:0 12px 30px rgba(20,80,63,.10)">
+    <source src="videos/medipaw-loop.mp4" type="video/mp4">
+  </video>
+  <p style="text-align:center;color:var(--slate);font-size:13.5px;margin-top:12px">
+    보호자의 한마디 → AI 증상 감지 → 첨부 사진 Vision 분석 → 응급도·의심질환 정리 (실서비스 녹화)
+  </p>
+</div></section>
+
+<section id="problem" style="background:#fff;border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="eyebrow">Problem</div>
+  <div class="h2">왜 만들었나</div>
+  <p class="lead">동물병원은 대부분 <b>전화 예약·종이 문진</b>으로 돌아가고, 보호자는 “지금 병원에 가야 할 응급인지”를 스스로 판단하기 어렵습니다. 수의사는 진료와 행정을 동시에 떠안고, 상담·문진·예약·진료·처방·경과 기록이 서로 끊겨 있습니다.</p>
+  <div class="grid2">
+    <div class="card"><div class="k">PAIN</div><h3>흩어진 진료 여정</h3>
+      <ul><li>상담 → 예약 → 진료 → 처방 → 경과가 각각 다른 채널·종이로 단절</li>
+      <li>보호자는 응급도 판단이 어렵고, 수의사는 사전 정보 없이 진료 시작</li></ul></div>
+    <div class="card"><div class="k">SOLUTION</div><h3>하나의 AI 워크플로우</h3>
+      <ul><li>보호자 발화 한 건이 상담·문진·예약·처방까지 <b>끊김 없이</b> 이어지도록 설계</li>
+      <li>응급은 즉시 내원 유도, 일반은 RAG 문진으로 사전 정보를 모아 수의사에게 전달</li></ul></div>
+  </div>
+</div></section>
+
+<section id="metrics"><div class="wrap">
+  <div class="eyebrow">Scale</div>
+  <div class="h2">숫자로 보는 프로젝트</div>
+  <div class="metrics">
+    <div class="metric"><div class="num">124</div><div class="lbl">REST API 엔드포인트<br/>(19 라우터)</div></div>
+    <div class="metric"><div class="num">27</div><div class="lbl">DB 테이블<br/>(26 마이그레이션)</div></div>
+    <div class="metric"><div class="num">123</div><div class="lbl">React 컴포넌트<br/>(3개 웹앱)</div></div>
+    <div class="metric"><div class="num">6</div><div class="lbl">AI 에이전트</div></div>
+    <div class="metric"><div class="num">142</div><div class="lbl">회귀 테스트<br/>+ CI 게이트</div></div>
+    <div class="metric"><div class="num">100%</div><div class="lbl">E2E 라우팅 정확도</div></div>
+    <div class="metric"><div class="num">3.7턴</div><div class="lbl">평균 대화 완료<br/>(간결성)</div></div>
+    <div class="metric"><div class="num">4.38</div><div class="lbl">종합 QA 평가<br/>(가중 /5)</div></div>
+    <div class="metric"><div class="num">19,206</div><div class="lbl">RAG 문진 문서</div></div>
+    <div class="metric"><div class="num">5</div><div class="lbl">자동 HTTPS 서브도메인</div></div>
+  </div>
+</div></section>
+
+<section id="arch" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="eyebrow">Architecture</div>
+  <div class="h2">발화 한 건이 흐르는 길</div>
+  <p class="lead">보호자 메시지는 FastAPI가 SSE 스트림으로 받고, LangGraph 오케스트레이터가 매 턴 담당 에이전트를 결정합니다. 명확한 입력은 규칙으로, 애매한 자연어는 LLM이 분류합니다.</p>
+  <div class="arch"><pre>
+   보호자 (React) ──SSE──▶  ┌──────────────────────────┐
+   수의사 (React) ────────▶ │   FastAPI Chat API        │
+   운영자 (React) ────────▶ │  Async SQLAlchemy / JWT   │
+                            └────────────┬─────────────┘
+                                         │  SessionContext (phase·slot·memo)
+                                         ▼
+                            ┌──────────────────────────┐
+                            │   LangGraph Orchestrator  │  규칙 우선 → 애매하면 LLM
+                            └────────────┬─────────────┘
+         ┌───────────┬──────────────────┼───────────────┬─────────────┐
+         ▼           ▼                  ▼               ▼             ▼
+     Reception     Triage            Schedule        Follow-up    Prescription
+    (병원/케어)  (문진·응급분류)      (예약 슬롯)     (경과·재예약)   (처방 초안)
+                    │
+                    ▼  pgvector RAG (유사 상담사례, 유사도 ≥ 0.60)
+
+   Infra:  AWS EC2·RDS·S3·CloudFront / Docker Compose / Nginx / Caddy(자동 HTTPS)
+           GitHub Actions CI·CD (main 머지 → 자동 배포) · pytest 게이트 · Langfuse 계측</pre></div>
+  <div style="margin-top:18px">
+    <span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Async SQLAlchemy</span>
+    <span class="tag">pgvector RAG</span><span class="tag">OpenAI</span><span class="tag">Langfuse</span>
+    <span class="tag">React 18 + TS</span><span class="tag">Zustand</span><span class="tag">Tailwind</span>
+    <span class="tag">PostgreSQL 16</span><span class="tag">Docker</span><span class="tag">Caddy</span>
+    <span class="tag">AWS</span><span class="tag">GitHub Actions</span>
+  </div>
+</div></section>
+
+<section id="decision"><div class="wrap">
+  <div class="eyebrow">Deep Dive</div>
+  <div class="h2">가장 어려웠던 결정 — 누가 이 발화를 처리할 것인가</div>
+  <p class="lead">멀티에이전트의 핵심이자 가장 오래 붙잡은 문제는 <b>라우팅</b>이었습니다. “발화 한 건을 어느 에이전트에 보낼 것인가”를 잘못 정하면 그 뒤 문진·예약·처방이 전부 어긋납니다.</p>
+  <div class="grid2" style="align-items:stretch">
+    <div class="card" style="border-left:4px solid #cbd5e1">
+      <div class="k" style="color:#94a3b8">시도 1 · 순수 LLM 라우팅</div>
+      <h3>왜 막혔나</h3>
+      <ul>
+        <li>모든 발화를 LLM이 분류 → 비슷한 의도(예: “예약 바꿀래요” vs “예약 전에 물어볼게요”)에서 <b>오분류 빈발</b></li>
+        <li>턴마다 LLM 호출 → 지연·비용 증가, 디버깅도 “왜 이리 갔는지” 추적 어려움</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:4px solid var(--pine)">
+      <div class="k">시도 2 · 규칙+LLM 하이브리드 (채택)</div>
+      <h3>어떻게 풀었나</h3>
+      <ul>
+        <li><b>명확한 입력은 규칙으로</b> 즉시 분기, <b>애매한 자연어만 LLM</b>에 위임</li>
+        <li>예약 전/후(phase)로 <b>후보 에이전트를 제한</b> → 구조적으로 오분류 차단</li>
+        <li>SessionContext에 phase·slot·memo를 영속화해 멀티턴 맥락 유지</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note" style="background:#eef6f3;border-color:#bfe3d8;color:var(--pine-dark)">
+    ✅ 결과 — 약 <b>1,000건 종합 QA에서 E2E 라우팅 정확도 100%</b>, 평균 <b>3.7턴</b>으로 간결하게 대화 완료. 별도 검수에서 규칙·실제 처리 불일치 50건 중 실버그는 1건, 위험 카테고리 안전성 판정 <b>fail 0건</b>.
+  </div>
+</div></section>
+
+<section id="contrib"><div class="wrap">
+  <div class="eyebrow">My Contribution</div>
+  <div class="h2">내가 직접 설계·구현한 것</div>
+  <p class="lead">5인 팀에서 커밋 1위(203/670). 멀티에이전트·RAG <b>초기 아키텍처를 설계</b>하고, 평가 자동화와 <b>인프라/배포를 전담</b>했으며, 보호자 앱 UX 개선과 풀스택 전 영역으로 확장했습니다. 각 항목에 실제 관여도(<span class="role own">단독</span> <span class="role led">주도</span> <span class="role ctb">기여</span>)를 표기했습니다.</p>
+  <div class="grid2">
+    <div class="card"><div class="k">01 · MULTI-AGENT <span class="role led">설계 주도</span></div><h3>멀티에이전트 오케스트레이션</h3>
+      <ul><li>규칙 + LLM <b>하이브리드 라우팅</b> 초기 설계 (명확=규칙 / 애매=LLM)</li>
+      <li>예약 전/후(phase)로 후보 제한 → 오분류 방지</li>
+      <li>SessionContext로 멀티턴 상태 영속화</li>
+      <li>후반 운영기에는 <b>Follow-up Filter 에이전트를 단독</b>으로 담당</li></ul></div>
+    <div class="card"><div class="k">02 · RAG <span class="role led">설계 주도</span></div><h3>RAG 문진 + 할루시네이션 방어</h3>
+      <ul><li><span class="mono">text-embedding-3-small</span>(1536d) + pgvector 초기 설계</li>
+      <li>유사도 <b>0.60 임계값</b> · LLM 쿼리 확장(fail-open)</li>
+      <li>3중 방어: 임계값 + RAGAS + CI 게이트</li></ul></div>
+    <div class="card"><div class="k">03 · UX <span class="role ctb">기여</span></div><h3>보호자 앱 UX · 응급 대화</h3>
+      <ul><li>동료가 잡아둔 초기 UI를 <b>보호자 화면 최종본으로 리디자인</b> + 전체 UX 설계</li>
+      <li>기계적 "병원 가세요" 대신 <b>공감 → 즉시 내원 → 빠른 예약 제안</b></li>
+      <li>안전 회귀(진단 단정·자가처치) <b>0건</b> 유지</li></ul></div>
+    <div class="card"><div class="k">04 · EVALUATION <span class="role own">단독</span></div><h3>평가 자동화 · 품질 검증</h3>
+      <ul><li>약 <b>1,000건 종합 QA</b> 자동화 (PetEVAL 200 + 지식iN 안전성 684 + 메모리 125 + E2E)</li>
+      <li>→ <b>E2E 라우팅 정확도 100%</b> · 문진 완료 <b>199/200</b> · 평균 <b>3.7턴</b> · 종합 가중 <b>4.38/5</b></li>
+      <li>위험 카테고리(약물 투여·민간요법·학대) <b>LLM 안전성 판정 fail 0건</b> · 운영자 대시보드로 회귀 추적</li></ul></div>
+    <div class="card"><div class="k">05 · FULL STACK <span class="role led">주도</span></div><h3>상담 → 진료 끊김 없는 연결</h3>
+      <ul><li>SSE 스트리밍 채팅 → 예약 슬롯 → EMR → <b>처방전 자동 생성</b></li>
+      <li>입점 심사 → "페이지 등록" 한 번에 병원/계정 자동 발행</li>
+      <li>상담 대화·제목까지 다국어 번역</li></ul></div>
+    <div class="card"><div class="k">06 · DEVOPS <span class="role own">단독</span></div><h3>인프라 · CI/CD · 배포</h3>
+      <ul><li>AWS EC2·RDS·S3·CloudFront + Docker Compose</li>
+      <li><b>Caddy 자동 HTTPS</b> 5개 서브도메인</li>
+      <li>GitHub Actions: main 머지 → 자동 배포 + <b>pytest 게이트</b></li></ul></div>
+  </div>
+</div></section>
+
+<section id="eval" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="eyebrow">Results</div>
+  <div class="h2">감각이 아니라 지표로</div>
+  <p class="lead">Hugging Face에 공개된 <b>해외 실제 동물병원 문진·증상 답변 데이터셋</b> 200건으로 평가셋을 구성, 대화 UX v2 개선 전후를 정량 비교했습니다. 안전 회귀 없이 연결률·표현 다양성을 끌어올렸습니다.</p>
+  <table>
+    <tr><th>지표</th><th>개선 전</th><th>개선 후</th></tr>
+    <tr><td>질문 연결률</td><td class="before">58%</td><td class="after">72%</td></tr>
+    <tr><td>예약 고정문구(천편일률)</td><td class="before">199건</td><td class="after">0건 · 표현 다양성 1→29</td></tr>
+    <tr><td>공감어 연속 2턴 반복</td><td class="before">21건</td><td class="after">6건</td></tr>
+    <tr><td>마무리 증상 나열형</td><td class="before">122건</td><td class="after">33건</td></tr>
+    <tr><td>안전 회귀(진단단정·자가처치 등)</td><td class="before">—</td><td class="after">0건 (무회귀)</td></tr>
+  </table>
+</div></section>
+
+<section id="shots"><div class="wrap">
+  <div class="eyebrow">Screens</div>
+  <div class="h2">실제 서비스 화면</div>
+  <p class="lead">라이브 서비스(*.medipaw.app)에서 데모 데이터로 캡처. 이미지를 클릭하면 확대됩니다.</p>
+
+  <div class="galtitle">전체 데모 영상 (2분 41초)</div>
+  <video controls muted playsinline preload="none"
+    poster="images/medipaw/demo-poster.webp"
+    style="width:100%;border:1px solid var(--line);border-radius:16px;display:block;background:#000;margin-bottom:8px">
+    <source src="videos/medipaw-demo.mp4" type="video/mp4">
+  </video>
+  <p style="color:var(--slate);font-size:13px;margin-bottom:8px">보호자 상담 → 문진 → 예약 → 진료(EMR) → 처방까지 끊김 없는 전체 워크플로우</p>
+
+  <div class="galtitle">핵심 화면</div>
+  <div class="shots">
+    <div class="shot big"><img loading="lazy" src="images/medipaw/12c-chatbot-conversation.webp" alt="보호자 AI 응급 상담"/><div class="cap"><b>보호자 AI 응급 상담</b> — "밥을 안 먹고 토해요" → 공감 + 즉시 내원 + 빠른 예약 제안</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/23-admin-eval-dashboard.webp" alt="운영자 AI 평가 대시보드"/><div class="cap"><b>운영자 AI 평가 대시보드</b> — 에이전트별 PASS/WARN · 점수 추이<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/32-vet-emr.webp" alt="수의사 EMR"/><div class="cap"><b>수의사 EMR</b> — 접수/대기 · 사전문진 · 처방전 자동 생성</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/31-vet-dashboard.webp" alt="수의사 대시보드"/><div class="cap"><b>수의사 대시보드</b> — 오늘의 진료 + 응급도 분류</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/01-company-marketing.webp" alt="서비스 랜딩"/><div class="cap"><b>서비스 랜딩</b> — 제품 소개 · 워크플로우 · 팀<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
+  </div>
+
+  <div class="galtitle">🐶 보호자 앱</div>
+  <div class="shots">
+    <div class="shot"><img loading="lazy" src="images/medipaw/11-guardian-home.webp" alt="보호자 홈"/><div class="cap"><b>홈</b> — 반려동물 관리 · 상담/예약 진입</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/13-guardian-hospitals.webp" alt="병원 찾기"/><div class="cap"><b>병원 찾기</b> — 검색 · 관심/주치 병원<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/14-guardian-reservations.webp" alt="예약 내역"/><div class="cap"><b>예약 내역</b> — 조회 · 변경 · 취소<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/15-guardian-mypage.webp" alt="마이페이지"/><div class="cap"><b>마이페이지</b> — 보호자 정보·설정</div></div>
+  </div>
+
+  <div class="galtitle">🩺 수의사 앱</div>
+  <div class="shots">
+    <div class="shot"><img loading="lazy" src="images/medipaw/33-vet-patients.webp" alt="환자 관리"/><div class="cap"><b>환자 관리</b> — 환자 검색·진료 이력</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/34-vet-reservation.webp" alt="예약 관리"/><div class="cap"><b>예약 관리</b> — 일/주/월 일정</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/35-vet-hospital-manage.webp" alt="병원 관리"/><div class="cap"><b>병원 관리</b> — 프로필·의료진·운영시간</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/05-api-swagger.webp" alt="API 문서"/><div class="cap"><b>API 문서(Swagger)</b> — 124개 엔드포인트<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
+  </div>
+
+  <div class="galtitle">🏢 운영자 웹</div>
+  <div class="shots">
+    <div class="shot"><img loading="lazy" src="images/medipaw/21-admin-applications.webp" alt="입점 심사"/><div class="cap"><b>입점 심사</b> — 신청 승인/반려</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/22-admin-hospitals.webp" alt="병원 관리"/><div class="cap"><b>병원 관리</b> — 병원·의료진·활성 상태</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/24-admin-contacts.webp" alt="고객 문의"/><div class="cap"><b>고객 문의</b> — 조회·이메일 답변</div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/02-company-apply.webp" alt="입점 신청"/><div class="cap"><b>입점 신청</b> — 병원 신청·서류 업로드<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p><a href="index.html" style="color:var(--pine);font-weight:700">← 포트폴리오로 돌아가기</a></p>
+  <p style="margin-top:10px"><b>MediPaw</b> · LLM 멀티에이전트 동물병원 진료 워크플로우 자동화 · 김찬영</p>
+</div></footer>
+
+<div class="lb" id="lb"><img id="lbimg" src="" alt=""/></div>
+<script>
+  const lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg');
+  document.querySelectorAll('.shot img').forEach(img=>{
+    img.addEventListener('click',()=>{lbimg.src=img.src;lb.classList.add('open')});
+  });
+  lb.addEventListener('click',()=>lb.classList.remove('open'));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open')});
+</script>
+</body>
+</html>

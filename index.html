@@ -51,6 +51,8 @@ body {
   font-family: var(--font-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
@@ -192,6 +194,11 @@ nav {
   border: 1px solid #FECACA; border-radius: 6px; font-size: 12px; font-weight: 600;
   margin-bottom: 12px;
 }
+.badge-award {
+  display: inline-block; padding: 4px 10px; background: #FFFBEB; color: #B45309;
+  border: 1px solid #FDE68A; border-radius: 6px; font-size: 12px; font-weight: 700;
+  margin-bottom: 12px;
+}
 
 /* OTHER PROJECTS */
 .other-projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -243,7 +250,7 @@ nav {
       </div>
     </div>
     <div class="profile-img-wrapper">
-      <img src="images/profile.png" alt="김찬영 프로필 사진" onerror="this.style.display='none'">
+      <img src="images/profile.webp" alt="김찬영 프로필 사진" onerror="this.style.display='none'">
     </div>
   </header>
 
@@ -253,7 +260,7 @@ nav {
     
     <div class="exp-list">
       <div class="exp-item">
-        <div class="exp-period">2025.12 — 2026.06 (예정)</div>
+        <div class="exp-period">2025.12 — 2026.06</div>
         <div class="exp-content">
           <h4>SK네트웍스 패밀리 AI 캠프 · AI 엔지니어</h4>
           <p>생물학적 데이터를 해석하고 서비스화할 수 있는 AI 엔지니어링 역량 확보 중 (PyTorch, LLM, Docker 등 실무 프로젝트 수행)</p>
@@ -306,27 +313,32 @@ nav {
 
     <div class="project-card">
       <div class="project-img">
-        <img src="images/medipaw.png" alt="MediPaw 프로젝트 화면" onerror="this.style.display='none'">
+        <img src="images/medipaw.webp" alt="MediPaw 프로젝트 화면" onerror="this.style.display='none'">
       </div>
       <div class="project-info">
-        <div class="project-meta">팀 리드 · 진행 중</div>
+        <div class="badge-award">🏆 SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위</div>
+        <div class="project-meta">팀 리드 · 5인 · 2026.04 – 06.26 (완료)</div>
         <h3>MediPaw 🐾</h3>
-        <p class="project-desc">반려동물의 골든타임을 AI가 먼저 읽어내는 응급도 분류 및 동물병원 업무 자동화 플랫폼</p>
+        <p class="project-desc">보호자 AI 상담→문진→예약→진료(EMR/처방)→경과까지 동물병원 워크플로우 전체를 자동화한 LLM 멀티에이전트 플랫폼</p>
         <ul class="project-bullets">
-          <li>팀장으로서 전체 프로젝트 일정, 역할 분배, 코드 통합 및 클라우드 배포 총괄</li>
-          <li>보호자용 Guardian Web 프론트엔드 (AI 문진, 예약 등) 개발</li>
-          <li>바이오 도메인 지식 기반 Multi-Agent 응급도 분류 초기 구조 설계</li>
+          <li>5인 팀 <strong>커밋 1위(203/670, 30%)</strong> — AI 에이전트·백엔드·인프라 주도 및 일정·코드 통합·배포 총괄</li>
+          <li><strong>LangGraph 멀티에이전트 라우터</strong>(규칙+LLM 하이브리드) 설계·구현 — 발화별 담당 에이전트 분배</li>
+          <li>pgvector <strong>RAG 문진</strong> + 운영자 <strong>AI 평가 대시보드(LLMOps)</strong> 구축 → 질문 연결률 58→72%, 안전 회귀 0건</li>
+          <li>AWS(EC2·RDS·S3·CloudFront) Docker 배포 + <strong>GitHub Actions CI/CD·pytest 게이트</strong></li>
         </ul>
         <div class="tech-stack">
-          <span class="tech-tag">React</span><span class="tech-tag">FastAPI</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">AWS</span>
+          <span class="tech-tag">LangGraph</span><span class="tech-tag">FastAPI</span><span class="tech-tag">RAG·pgvector</span><span class="tech-tag">React·TS</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Docker</span><span class="tech-tag">AWS</span><span class="tech-tag">GitHub Actions</span>
         </div>
-        <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-FINAL-1Team" target="_blank" class="github-link">GitHub Repo →</a>
+        <div class="link-group">
+          <a href="medipaw.html" class="github-link">프로젝트 상세 →</a>
+          <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-FINAL-1Team" target="_blank" class="github-link">GitHub Repo →</a>
+        </div>
       </div>
     </div>
 
     <div class="project-card">
       <div class="project-img">
-        <img src="images/boyak.png" alt="보약 프로젝트 화면" onerror="this.style.display='none'">
+        <img src="images/boyak.webp" alt="보약 프로젝트 화면" onerror="this.style.display='none'">
       </div>
       <div class="project-info">
         <div class="badge-alert">제 12회 보건의료빅데이터 AI 활용 창업경진대회 출품작</div>
@@ -350,7 +362,7 @@ nav {
 
     <div class="project-card">
       <div class="project-img">
-        <img src="images/biorag.png" alt="BioRAG 프로젝트 화면" onerror="this.style.display='none'">
+        <img src="images/biorag.webp" alt="BioRAG 프로젝트 화면" onerror="this.style.display='none'">
       </div>
       <div class="project-info">
         <div class="project-meta">3~4차 프로젝트 · 챗봇 구축</div>

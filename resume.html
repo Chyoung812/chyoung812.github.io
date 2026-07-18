@@ -82,9 +82,19 @@ section { margin-bottom: 15px; }
 
 /* 인쇄 */
 @media print {
-  body { background: #fff; }
-  .page { margin: 0; box-shadow: none; width: auto; min-height: auto; padding: 12mm 14mm; }
-  @page { size: A4; margin: 0; }
+  body {
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { margin: 0; box-shadow: none; width: auto; min-height: auto; padding: 0; }
+  @page { size: A4; margin: 13mm 15mm; }   /* 여백을 @page에 두어 2페이지 이후에도 상단 여백 유지 */
+
+  /* 페이지 경계에서 내용이 잘리지 않도록 보호 */
+  .summary { break-inside: avoid; }
+  .skills { break-inside: avoid; }
+  .item { break-inside: avoid; }
+  .sec-title { break-after: avoid; }   /* 섹션 제목이 페이지 끝에 홀로 남지 않도록 */
 }
 </style>
 </head>
@@ -103,18 +113,31 @@ section { margin-bottom: 15px; }
   </header>
 
   <p class="summary">
-    생화학 석사 및 CAR-T 세포치료제 연구원 출신의 <b>Bio × AI 풀스택 엔지니어</b>입니다.
-    실험실에서 직접 데이터를 생산·분석한 경험을 바탕으로, 헬스케어 도메인의 맥락을 깊이 이해하는
-    AI 파이프라인과 서비스를 설계·구축하여 의료·바이오 분야의 실질적 문제를 풉니다.
+    생화학 석사와 CAR-T 연구, qPCR 학술지원 경험을 바탕으로 <b>바이오·헬스케어 도메인을 이해하는 AI 엔지니어</b>입니다.
+    CAR-T 세포치료제 POC팀에서 후보 물질의 효능과 독성을 세포·동물 모델에서 검증했고, 이후 전략기획팀에서 qPCR 고객의 실험 데이터와 제품 판매 데이터를 분석했습니다.
+    이후 LLM 멀티에이전트 프로젝트에서 라우팅·RAG·LLMOps 평가를 직접 구현하며, <b>AI 기능을 평가셋과 실패 케이스로 검증하는</b> 경험을 쌓았습니다.
+    동물병원 상담–문진–예약–진료 흐름을 LangGraph 멀티에이전트와 RAG 기반 문진 구조로 구현하고, AWS 배포와 LLMOps 평가 대시보드까지 구축했습니다.
   </p>
+
+  <section>
+    <div class="sec-title">핵심 강점</div>
+    <div class="item">
+      <ul>
+        <li><b>바이오 도메인 전문성</b> — CAR-T 연구·qPCR 학술지원 경험을 바탕으로 바이오·헬스케어 텍스트와 실험 맥락을 이해합니다.</li>
+        <li><b>검증 중심 AI 개발</b> — 자체 평가셋 약 1,000건과 LLMOps 대시보드로 라우팅·citation·faithfulness·안전성을 검증했습니다.</li>
+        <li><b>SCI(E) 공동 1저자</b> — <i>Xenopus</i> 배아 모델에서 실험 프로토콜을 구축하고 섬모 운동성을 정량 분석해 Ruvbl1의 섬모 운동 필수 기능을 규명 (<i>Development &amp; Reproduction</i>, 2023).</li>
+      </ul>
+    </div>
+  </section>
 
   <section>
     <div class="sec-title">Skills</div>
     <dl class="skills">
-      <dt>AI / ML</dt>      <dd>PyTorch, LLM, LangGraph (Multi-Agent), RAG (LangChain · pgvector · Chroma DB), OpenAI API, Langfuse</dd>
-      <dt>Backend</dt>      <dd>Python, FastAPI, SQLAlchemy (Async), PostgreSQL</dd>
-      <dt>Frontend</dt>     <dd>React, TypeScript, Next.js</dd>
+      <dt>GenAI / RAG</dt>  <dd>LangGraph (Multi-Agent), LangChain, OpenAI API, pgvector, Chroma DB, PyTorch</dd>
+      <dt>Backend</dt>      <dd>Python, FastAPI, SQLAlchemy (Async), PostgreSQL, API flow 설계, 예외 처리</dd>
+      <dt>Evaluation</dt>   <dd>LLMOps 평가 대시보드, faithfulness · citation 평가, hallucination/안전성 실패 케이스 분석, RAGAS, Langfuse, pytest 회귀 테스트</dd>
       <dt>Infra / Tools</dt><dd>Docker, AWS (EC2 · RDS · S3), GitHub Actions (CI/CD), Render, Vercel, Git, Streamlit</dd>
+      <dt>Frontend</dt>     <dd>React/TypeScript · Next.js 기반 보호자·수의사·운영자 화면 구현</dd>
       <dt>Domain</dt>       <dd>분자생물학, 세포치료제(CAR-T), 후생유전학, 바이오 데이터 분석</dd>
     </dl>
   </section>
@@ -128,30 +151,33 @@ section { margin-bottom: 15px; }
         <span class="period">2025.12 – 2026.06</span>
       </div>
       <ul>
-        <li>PyTorch, LLM, Docker 기반 실무 프로젝트를 통해 AI 엔지니어링 역량 확보</li>
-        <li>생물학적 데이터를 해석하고 서비스화하는 AI 파이프라인 설계·구현</li>
+        <li>LangGraph 멀티에이전트 라우팅, pgvector RAG 문진, LLMOps 평가 대시보드, AWS 배포 파이프라인을 구현</li>
+        <li>바이오·헬스케어 텍스트를 근거와 함께 답하고 검증하는 AI 서비스로 만드는 데 집중 (상세는 Projects 참고)</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-head">
-        <h3>전략기획팀 학술 지원·마케팅 · 다인바이오</h3>
+        <h3>학술 지원·마케팅 · 다인바이오 (전략기획팀)</h3>
         <span class="period">2024.11 – 2025.09</span>
       </div>
+      <div class="org">Roche 분자진단(qPCR) 장비의 학술 지원과 시장 전략 담당</div>
       <ul>
-        <li>Roche qPCR 장비 고객 학술 문의 대응 및 프로토콜 최적화 가이드 제공</li>
-        <li>제품별 판매 실적(YoY) 데이터 기반 시장 전략 수립</li>
+        <li>병원·연구실의 qPCR 고객 문의(Ct 이상, 비특이 증폭 등)를 원인별로 분석하고 프로토콜 최적화 가이드를 제공</li>
+        <li>제품별 판매 데이터(YoY)를 분석해 고객 수요 변화와 부진 원인을 도출</li>
       </ul>
     </div>
 
     <div class="item">
       <div class="item-head">
-        <h3>POC팀 연구원 · 티카로스 (Ticaros)</h3>
+        <h3>연구원 · 티카로스 (Ticaros, POC팀)</h3>
         <span class="period">2022.07 – 2023.08</span>
       </div>
+      <div class="org">CAR-T 세포치료제 후보의 제작과 세포·동물 모델 검증 (POC)</div>
       <ul>
-        <li>CAR-T 세포치료제 전주기 파이프라인 수행 (Cloning, Viral vector 생산, T-cell Transduction)</li>
-        <li>FACS 기반 세포 품질 분석 및 동물 모델 효능 검증</li>
+        <li>Cloning → 렌티바이러스 벡터 생산 → T세포 형질도입까지 CAR-T 제작 전주기 수행</li>
+        <li>FACS 기반 CAR 발현율·세포 품질을 정량 분석</li>
+        <li>세포·마우스 모델에서 CAR-T 후보의 <b>효능·독성 검증 데이터를 확보</b></li>
       </ul>
     </div>
   </section>
@@ -164,11 +190,14 @@ section { margin-bottom: 15px; }
         <h3>MediPaw — LLM 멀티에이전트 동물병원 진료 워크플로우 자동화 플랫폼</h3>
         <span class="period">팀 리드 · 5인 · 2026.04 – 06.26</span>
       </div>
+      <div class="org">전화·종이 기반 동물병원 진료를 AI 멀티에이전트 워크플로우로 자동화 · 🏆 AI 캠프 최종 프로젝트 1위</div>
       <ul>
-        <li>🏆 <b>SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위</b> · 5인 팀 커밋 1위(203/670, 30%) — AI 에이전트·백엔드·인프라 주도 및 배포 총괄</li>
-        <li><b>LangGraph 멀티에이전트 라우터</b>(규칙+LLM 하이브리드) 설계·구현 — 발화별 담당 에이전트 분배</li>
-        <li>pgvector <b>RAG 문진</b> + 운영자 <b>AI 평가 대시보드(LLMOps)</b> 구축 → 질문 연결률 58→72%, 안전 회귀 0건</li>
-        <li>AWS(EC2·RDS·S3·CloudFront) Docker 배포 + <b>GitHub Actions CI/CD·pytest 게이트</b></li>
+        <li>LangGraph 라우팅/문진 에이전트, FastAPI API, 운영자 LLMOps 대시보드, AWS 배포 파이프라인을 담당</li>
+        <li>순수 LLM 라우팅의 오분류·지연 문제를 확인하고, 버튼/예약슬롯 등 <b>정형 입력은 규칙으로 처리, 자유 발화만 LLM이 판단</b>하도록 하이브리드 라우팅을 설계<br>→ 예약 전/후 핵심 시나리오 라우팅을 회귀 테스트화하고, PetEVAL 200건 기준 평균 3.6턴 만에 문진 완료(짧을수록 좋음)</li>
+        <li>pgvector 기반 <b>RAG 문진</b>에 3중 할루시네이션 방어(유사도 0.60 임계값 + RAGAS + CI 게이트) 적용<br>→ <b>문진 후속 질문이 맥락에 맞게 이어지는 비율 58% → 72% 개선</b></li>
+        <li>운영자용 <b>LLMOps 평가 대시보드</b> 구축 — 자체 평가셋 약 1,000건(PetEVAL 200 · 합성 안전성 684 · 메모리 125 · E2E)을 출처 인용·faithfulness·안전성 기준으로 자동 평가<br>→ 합성 안전성 평가셋 684건과 E2E 결과를 분석해 라우팅·응급 안내·저장 누락 등 실패 케이스를 추적</li>
+        <li>라우팅/RAG/예약 상태 불일치 케이스를 <b>pytest로 회귀 테스트화</b>하고, GitHub Actions에서 실패 시 merge를 막도록 구성</li>
+        <li>AWS(EC2·RDS·S3·CloudFront)·Docker·Caddy 자동 HTTPS로 배포 환경 구성</li>
       </ul>
       <div class="tech"><b>Stack:</b> LangGraph · FastAPI · RAG·pgvector · React·TS · PostgreSQL · Docker · AWS · GitHub Actions</div>
     </div>
@@ -178,11 +207,10 @@ section { margin-bottom: 15px; }
         <h3>보약 (Boyak) — 시니어 맞춤형 헬스케어 서비스</h3>
         <span class="period">팀 리드 · 완료</span>
       </div>
+      <div class="org">독거 어르신의 약물 부작용·병원비·이동 장벽을 돕는 서비스 · 보건의료빅데이터 AI 창업경진대회 출품</div>
       <ul>
-        <li>제12회 보건의료빅데이터 AI 활용 창업경진대회 출품작</li>
-        <li>프로젝트 아키텍처 설계 및 FastAPI/Next.js 배포 환경 구축</li>
-        <li>TMap 무장애 보행 경로 API 연동, 계단 수 최소화 길찾기 알고리즘 구현</li>
-        <li>약봉투 OCR + 심평원 DUR 공공데이터 연동 약물 안전성 분석</li>
+        <li>팀 리드로 서비스 아키텍처를 정리하고, FastAPI/Next.js 기반 API 흐름을 설계</li>
+        <li>약봉투 OCR과 심평원 DUR 공공데이터를 연동해 약물 상호작용·안전성 분석, TMap 무장애 보행 API로 계단 수를 최소화하는 길찾기 구현</li>
       </ul>
       <div class="tech"><b>Stack:</b> Python · Next.js · OpenAI API · Render &nbsp;|&nbsp; <b>Demo:</b> boyak-sable.vercel.app</div>
     </div>
@@ -190,13 +218,27 @@ section { margin-bottom: 15px; }
     <div class="item">
       <div class="item-head">
         <h3>BioRAG — 건강 트렌드 질의응답 챗봇</h3>
-        <span class="period">RAG 시스템 구축</span>
+        <span class="period">논문 근거 검색·청킹·벡터 검색을 조정한 기반 프로젝트</span>
       </div>
+      <div class="org">건강 질문에 문헌·트렌드 근거를 함께 제시하는 RAG 챗봇</div>
       <ul>
-        <li>LangChain + Chroma DB 기반 RAG 파이프라인 구축</li>
-        <li>문서 임베딩 및 벡터 검색 최적화로 답변 정확도 향상</li>
+        <li>LangChain + Chroma DB 기반 검색–생성 파이프라인 구축</li>
+        <li>검색 누락과 근거 없는 응답 사례를 확인하고, chunking·임베딩·벡터 검색 방식을 조정</li>
+        <li>여기서 익힌 문헌 검색·청킹·근거 제시 방식이 MediPaw의 RAG 문진 설계로 이어졌습니다</li>
       </ul>
       <div class="tech"><b>Stack:</b> LangChain · Chroma DB · LLM</div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>데이터 분석 기초 프로젝트</h3>
+        <span class="period">부트캠프 초기</span>
+      </div>
+      <ul>
+        <li><b>OULAD 학습 이탈 예측</b> — Logistic Regression 모델링·군집 분석과 대시보드 시각화</li>
+        <li><b>지자체 유형별 자동차 분포 분석</b> — KLACI 데이터 크롤링·전처리 후 Streamlit 대시보드 시각화</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> Python · scikit-learn · Streamlit</div>
     </div>
   </section>
 
@@ -210,7 +252,8 @@ section { margin-bottom: 15px; }
       <div class="org">Development &amp; Reproduction (SCI(E))</div>
       <ul>
         <li>Chan Young Kim* 외 (*공동 1저자) — DOI: 10.12717/DR.2023.27.3.159</li>
-        <li>Ruvbl1 결손 시 기저소체 극성 교란으로 섬모 유체 흐름이 감소함을 세계 최초 규명</li>
+        <li>공동 1저자로 실험 프로토콜 구축과 섬모 운동성 정량 분석을 담당</li>
+        <li>Ruvbl1 결손이 기저소체 극성을 교란해 섬모 유체 흐름을 감소시킴을 규명</li>
       </ul>
     </div>
   </section>
@@ -223,7 +266,7 @@ section { margin-bottom: 15px; }
         <span class="period">2020.03 – 2022.02</span>
       </div>
       <ul>
-        <li>비주류 모델(<i>Xenopus laevis</i>) 독자적 실험 프로토콜 구축, 섬모 운동성 정량 분석 (GPA 4.2 / 4.3)</li>
+        <li>비주류 모델(<i>Xenopus laevis</i>)의 실험 프로토콜을 구축하고 섬모 운동성을 정량 분석 (GPA 4.2 / 4.3)</li>
       </ul>
     </div>
   </section>

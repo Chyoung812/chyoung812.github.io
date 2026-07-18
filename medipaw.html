@@ -117,8 +117,6 @@
   <p class="sub">보호자 AI 상담 → 문진 → 예약 → 진료(EMR·처방) → 경과 관리까지 동물병원의 진료 워크플로우 전체를 자동화한 플랫폼. 보호자·수의사·운영자 3개 웹앱과 LangGraph 오케스트레이터, RAG 문진, AWS 자동 배포 파이프라인을 직접 설계·구현했습니다.</p>
   <div class="meta">
     <span class="chip"><b>김찬영</b> · 팀 리드 · Full Stack·AI·DevOps</span>
-    <span class="chip">커밋 <b>203 / 670</b> (1위, 30%)</span>
-    <span class="chip">약 <b>69,000</b> LOC</span>
     <span class="chip">5인 · 2026.04 – 06.26</span>
   </div>
   <div class="cta">
@@ -148,7 +146,7 @@
       <ul><li>상담 → 예약 → 진료 → 처방 → 경과가 각각 다른 채널·종이로 단절</li>
       <li>보호자는 응급도 판단이 어렵고, 수의사는 사전 정보 없이 진료 시작</li></ul></div>
     <div class="card"><div class="k">SOLUTION</div><h3>하나의 AI 워크플로우</h3>
-      <ul><li>보호자 발화 한 건이 상담·문진·예약·처방까지 <b>끊김 없이</b> 이어지도록 설계</li>
+      <ul><li>보호자의 말 한마디가 상담·문진·예약·처방까지 <b>끊김 없이</b> 이어지도록 설계</li>
       <li>응급은 즉시 내원 유도, 일반은 RAG 문진으로 사전 정보를 모아 수의사에게 전달</li></ul></div>
   </div>
 </div></section>
@@ -172,7 +170,7 @@
 
 <section id="arch" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
   <div class="eyebrow">Architecture</div>
-  <div class="h2">발화 한 건이 흐르는 길</div>
+  <div class="h2">보호자의 말이 처리되는 흐름</div>
   <p class="lead">보호자 메시지는 FastAPI가 SSE 스트림으로 받고, LangGraph 오케스트레이터가 매 턴 담당 에이전트를 결정합니다. 명확한 입력은 규칙으로, 애매한 자연어는 LLM이 분류합니다.</p>
   <div class="arch"><pre>
    보호자 (React) ──SSE──▶  ┌──────────────────────────┐
@@ -204,15 +202,15 @@
 
 <section id="decision"><div class="wrap">
   <div class="eyebrow">Deep Dive</div>
-  <div class="h2">가장 어려웠던 결정 — 누가 이 발화를 처리할 것인가</div>
-  <p class="lead">멀티에이전트의 핵심이자 가장 오래 붙잡은 문제는 <b>라우팅</b>이었습니다. “발화 한 건을 어느 에이전트에 보낼 것인가”를 잘못 정하면 그 뒤 문진·예약·처방이 전부 어긋납니다.</p>
+  <div class="h2">가장 어려웠던 결정 — 보호자의 말을 어느 에이전트가 맡을까</div>
+  <p class="lead">멀티에이전트에서 가장 오래 고민한 문제는 <b>라우팅</b>이었습니다. 보호자의 말을 어느 에이전트가 맡을지 잘못 정하면 그 뒤 문진·예약·처방이 전부 어긋납니다.</p>
   <div class="grid2" style="align-items:stretch">
     <div class="card" style="border-left:4px solid #cbd5e1">
       <div class="k" style="color:#94a3b8">시도 1 · 순수 LLM 라우팅</div>
       <h3>왜 막혔나</h3>
       <ul>
-        <li>모든 발화를 LLM이 분류 → 비슷한 의도(예: “예약 바꿀래요” vs “예약 전에 물어볼게요”)에서 <b>오분류 빈발</b></li>
-        <li>턴마다 LLM 호출 → 지연·비용 증가, 디버깅도 “왜 이리 갔는지” 추적 어려움</li>
+        <li>모든 발화를 LLM이 분류하니 비슷한 요청을 <b>매번 다르게(일관되지 않게) 분류</b></li>
+        <li>턴마다 LLM 호출 → 지연·비용 증가, “왜 그 판단을 했는지” 근거 추적도 어려움</li>
       </ul>
     </div>
     <div class="card" style="border-left:4px solid var(--pine)">
@@ -226,37 +224,37 @@
     </div>
   </div>
   <div class="note" style="background:#eef6f3;border-color:#bfe3d8;color:var(--pine-dark)">
-    ✅ 결과 — 약 <b>1,000건 종합 QA에서 E2E 라우팅 정확도 100%</b>, 평균 <b>3.7턴</b>으로 간결하게 대화 완료. 별도 검수에서 규칙·실제 처리 불일치 50건 중 실버그는 1건, 위험 카테고리 안전성 판정 <b>fail 0건</b>.
+    ✅ 결과 — 약 <b>1,000건 종합 QA에서 E2E 라우팅 정확도 100%</b>, 평균 <b>3.7턴</b>으로 간결하게 대화 완료. 위험 카테고리 안전성 판정 <b>fail 0건</b>.
   </div>
 </div></section>
 
 <section id="contrib"><div class="wrap">
   <div class="eyebrow">My Contribution</div>
   <div class="h2">내가 직접 설계·구현한 것</div>
-  <p class="lead">5인 팀에서 커밋 1위(203/670). 멀티에이전트·RAG <b>초기 아키텍처를 설계</b>하고, 평가 자동화와 <b>인프라/배포를 전담</b>했으며, 보호자 앱 UX 개선과 풀스택 전 영역으로 확장했습니다. 각 항목에 실제 관여도(<span class="role own">단독</span> <span class="role led">주도</span> <span class="role ctb">기여</span>)를 표기했습니다.</p>
+  <p class="lead">멀티에이전트·RAG 아키텍처를 설계하고, 평가 자동화와 인프라/배포를 맡았으며, 보호자 앱 UX 개선과 풀스택 전 영역으로 확장했습니다.</p>
   <div class="grid2">
-    <div class="card"><div class="k">01 · MULTI-AGENT <span class="role led">설계 주도</span></div><h3>멀티에이전트 오케스트레이션</h3>
-      <ul><li>규칙 + LLM <b>하이브리드 라우팅</b> 초기 설계 (명확=규칙 / 애매=LLM)</li>
+    <div class="card"><div class="k">01 · MULTI-AGENT</div><h3>멀티에이전트 오케스트레이션</h3>
+      <ul><li>규칙 + LLM <b>하이브리드 라우팅</b> 설계 (명확=규칙 / 애매=LLM)</li>
       <li>예약 전/후(phase)로 후보 제한 → 오분류 방지</li>
       <li>SessionContext로 멀티턴 상태 영속화</li>
-      <li>후반 운영기에는 <b>Follow-up Filter 에이전트를 단독</b>으로 담당</li></ul></div>
-    <div class="card"><div class="k">02 · RAG <span class="role led">설계 주도</span></div><h3>RAG 문진 + 할루시네이션 방어</h3>
+      <li>후반 운영기에는 Follow-up Filter 에이전트를 담당</li></ul></div>
+    <div class="card"><div class="k">02 · RAG</div><h3>RAG 문진 + 할루시네이션 방어</h3>
       <ul><li><span class="mono">text-embedding-3-small</span>(1536d) + pgvector 초기 설계</li>
       <li>유사도 <b>0.60 임계값</b> · LLM 쿼리 확장(fail-open)</li>
       <li>3중 방어: 임계값 + RAGAS + CI 게이트</li></ul></div>
-    <div class="card"><div class="k">03 · UX <span class="role ctb">기여</span></div><h3>보호자 앱 UX · 응급 대화</h3>
+    <div class="card"><div class="k">03 · UX</div><h3>보호자 앱 UX · 응급 대화</h3>
       <ul><li>동료가 잡아둔 초기 UI를 <b>보호자 화면 최종본으로 리디자인</b> + 전체 UX 설계</li>
       <li>기계적 "병원 가세요" 대신 <b>공감 → 즉시 내원 → 빠른 예약 제안</b></li>
       <li>안전 회귀(진단 단정·자가처치) <b>0건</b> 유지</li></ul></div>
-    <div class="card"><div class="k">04 · EVALUATION <span class="role own">단독</span></div><h3>평가 자동화 · 품질 검증</h3>
+    <div class="card"><div class="k">04 · EVALUATION</div><h3>평가 자동화 · 품질 검증</h3>
       <ul><li>약 <b>1,000건 종합 QA</b> 자동화 (PetEVAL 200 + 지식iN 안전성 684 + 메모리 125 + E2E)</li>
       <li>→ <b>E2E 라우팅 정확도 100%</b> · 문진 완료 <b>199/200</b> · 평균 <b>3.7턴</b> · 종합 가중 <b>4.38/5</b></li>
       <li>위험 카테고리(약물 투여·민간요법·학대) <b>LLM 안전성 판정 fail 0건</b> · 운영자 대시보드로 회귀 추적</li></ul></div>
-    <div class="card"><div class="k">05 · FULL STACK <span class="role led">주도</span></div><h3>상담 → 진료 끊김 없는 연결</h3>
+    <div class="card"><div class="k">05 · FULL STACK</div><h3>상담 → 진료 끊김 없는 연결</h3>
       <ul><li>SSE 스트리밍 채팅 → 예약 슬롯 → EMR → <b>처방전 자동 생성</b></li>
       <li>입점 심사 → "페이지 등록" 한 번에 병원/계정 자동 발행</li>
       <li>상담 대화·제목까지 다국어 번역</li></ul></div>
-    <div class="card"><div class="k">06 · DEVOPS <span class="role own">단독</span></div><h3>인프라 · CI/CD · 배포</h3>
+    <div class="card"><div class="k">06 · DEVOPS</div><h3>인프라 · CI/CD · 배포</h3>
       <ul><li>AWS EC2·RDS·S3·CloudFront + Docker Compose</li>
       <li><b>Caddy 자동 HTTPS</b> 5개 서브도메인</li>
       <li>GitHub Actions: main 머지 → 자동 배포 + <b>pytest 게이트</b></li></ul></div>

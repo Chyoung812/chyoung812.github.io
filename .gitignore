@@ -1,3 +1,19 @@
 .vscode/
 images/medipaw_old_backup.png
 .DS_Store
+build/
+.claude/
+
+# Personal application documents — never commit to public repo
+*김찬영*
+FINAL_Seegene_Portfolio_Kim.pdf
+portfolio_2차_*
+resume_2차_*
+모두닥_*
+씨젠_*
+엔코아_*
+*.bak
+
+# Local working files
+_*.png
+build_variants.py

@@ -89,6 +89,9 @@ section { margin-bottom: 15px; }
   }
   .page { margin: 0; box-shadow: none; width: auto; min-height: auto; padding: 0; }
   @page { size: A4; margin: 13mm 15mm; }   /* 여백을 @page에 두어 2페이지 이후에도 상단 여백 유지 */
+  section { margin-bottom: 12px; }
+  .item { margin-bottom: 8px; }
+  .item li { margin-bottom: 2px; }
 
   /* 페이지 경계에서 내용이 잘리지 않도록 보호 */
   .summary { break-inside: avoid; }
@@ -114,7 +117,7 @@ section { margin-bottom: 15px; }
 
   <p class="summary">
     생화학 석사와 CAR-T 연구, qPCR 학술지원 경험을 바탕으로 <b>바이오·헬스케어 도메인을 이해하는 AI 엔지니어</b>입니다.
-    CAR-T 세포치료제 POC팀에서 후보 물질의 효능과 독성을 세포·동물 모델에서 검증했고, 이후 전략기획팀에서 qPCR 고객의 실험 데이터와 제품 판매 데이터를 분석했습니다.
+    CAR-T(CD19 switchable) 세포치료제 개발 현장에서 세포 배양·바이러스 제작과 마우스·in vitro 평가 실험을 수행했고, 이후 전략기획팀에서 qPCR 고객의 실험 데이터와 제품 판매 데이터를 분석했습니다.
     이후 LLM 멀티에이전트 프로젝트에서 라우팅·RAG·LLMOps 평가를 직접 구현하며, <b>AI 기능을 평가셋과 실패 케이스로 검증하는</b> 경험을 쌓았습니다.
     동물병원 상담–문진–예약–진료 흐름을 LangGraph 멀티에이전트와 RAG 기반 문진 구조로 구현하고, AWS 배포와 LLMOps 평가 대시보드까지 구축했습니다.
   </p>
@@ -134,7 +137,8 @@ section { margin-bottom: 15px; }
     <div class="sec-title">Skills</div>
     <dl class="skills">
       <dt>GenAI / RAG</dt>  <dd>LangGraph (Multi-Agent), LangChain, OpenAI API, pgvector, Chroma DB, PyTorch</dd>
-      <dt>Backend</dt>      <dd>Python, FastAPI, SQLAlchemy (Async), PostgreSQL, API flow 설계, 예외 처리</dd>
+      <dt>Vision</dt>       <dd>RF-DETR 객체 탐지 파인튜닝, 데이터 큐레이션·홀드아웃 분리, mAP · PR 곡선 · 임계값 스윕 평가</dd>
+      <dt>Backend</dt>      <dd>Python, FastAPI, SQLAlchemy (Async), PostgreSQL, MySQL, Supabase, API flow 설계, 예외 처리</dd>
       <dt>Evaluation</dt>   <dd>LLMOps 평가 대시보드, faithfulness · citation 평가, hallucination/안전성 실패 케이스 분석, RAGAS, Langfuse, pytest 회귀 테스트</dd>
       <dt>Infra / Tools</dt><dd>Docker, AWS (EC2 · RDS · S3), GitHub Actions (CI/CD), Render, Vercel, Git, Streamlit</dd>
       <dt>Frontend</dt>     <dd>React/TypeScript · Next.js 기반 보호자·수의사·운영자 화면 구현</dd>
@@ -170,14 +174,15 @@ section { margin-bottom: 15px; }
 
     <div class="item">
       <div class="item-head">
-        <h3>연구원 · 티카로스 (Ticaros, POC팀)</h3>
+        <h3>연구원 · 티카로스 (Ticaros)</h3>
         <span class="period">2022.07 – 2023.08</span>
       </div>
-      <div class="org">CAR-T 세포치료제 후보의 제작과 세포·동물 모델 검증 (POC)</div>
+      <div class="org">CD19 switchable CAR-T 세포치료제 개발</div>
       <ul>
-        <li>Cloning → 렌티바이러스 벡터 생산 → T세포 형질도입까지 CAR-T 제작 전주기 수행</li>
-        <li>FACS 기반 CAR 발현율·세포 품질을 정량 분석</li>
-        <li>세포·마우스 모델에서 CAR-T 후보의 <b>효능·독성 검증 데이터를 확보</b></li>
+        <li>회사 보유 벡터를 활용한 cloning을 수행하고, 세포 배양(부유·부착)·cell line 관리·바이러스 제작을 입사 후 익혀 담당</li>
+        <li><i>in vivo</i> — 마우스 종양 모델의 체중·종양 크기(tumor size) 측정과 IVIS 영상 데이터 정리</li>
+        <li><i>in vitro</i> — cytotoxicity·ELISA 실험 계획 및 수행</li>
+        <li>FACS로 세포 순도(purity)·CAR 발현도를 확인하고 데이터 정리</li>
       </ul>
     </div>
   </section>
@@ -204,13 +209,41 @@ section { margin-bottom: 15px; }
 
     <div class="item">
       <div class="item-head">
+        <h3>PATCH RUN — 러닝 중 도로 파손 제보 서비스</h3>
+        <span class="period">1인 개발 · 2026.08</span>
+      </div>
+      <div class="org">러너가 발견해 올리고 AI가 1차 판별하는 도로 파손 제보 서비스 · Superb AI × BDAI 비전 해커톤 본선 진출</div>
+      <ul>
+        <li>RDD2022 2만여 장을 4,000장으로 큐레이션(오탐 원인은 hard negative로 포함)해 RF-DETR 파인튜닝, 한 번에 한 변수씩 3회 학습<br>→ 학습에 쓰지 않은 홀드아웃 200장 기준 <b>mAP@0.5 0.016(제로샷) → 0.29</b>, 평균 추론 513ms</li>
+        <li>탐지는 운영자 검수 부담을 고려해 F1 최대값(0.5)을, 얼굴·번호판 블러는 누락 방지를 위해 0.15를 적용</li>
+        <li>도로 여부 → 파손 4종 탐지 → 비식별화 → 중복 판별(dHash·30m 반경·VLM 대조) → 운영자 승인 → 행정동별 우선순위 CSV까지 배포</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> RF-DETR · Superb AI · FastAPI · Next.js · Supabase · Vercel &nbsp;|&nbsp; <b>Demo:</b> patch-run.vercel.app</div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>플레이 경주 — 역할 기반 경주 여행 웹앱</h3>
+        <span class="period">5인 팀 · 2026.07 – 09</span>
+      </div>
+      <div class="org">신라 시대 역할별 코스 추천·방문 퀘스트·음성 도슨트 여행 서비스 · 2026 관광데이터 활용 공모전 본선 진출</div>
+      <ul>
+        <li>홈 화면·관광 데이터·다국어 담당 — TourAPI 관광지·행사를 DB에 적재하고 홈 화면 API 설계·구현 (Django → FastAPI)</li>
+        <li>이번 달 행사는 TourAPI 실시간 조회에 짧은 캐시를 두어 중복 호출을 막고, API 장애 시 저장된 행사로 대체</li>
+        <li>한국어·영어·일본어·중국어 지원 — 번역이 없는 항목은 한국어로 대체, 커뮤니티 글은 LLM 번역 후 캐시</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> FastAPI · MySQL · TourAPI · OpenAI API · Next.js · Vercel &nbsp;|&nbsp; <b>Demo:</b> tourism-data-2026.vercel.app</div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
         <h3>보약 (Boyak) — 시니어 맞춤형 헬스케어 서비스</h3>
         <span class="period">팀 리드 · 완료</span>
       </div>
       <div class="org">독거 어르신의 약물 부작용·병원비·이동 장벽을 돕는 서비스 · 보건의료빅데이터 AI 창업경진대회 출품</div>
       <ul>
         <li>팀 리드로 서비스 아키텍처를 정리하고, FastAPI/Next.js 기반 API 흐름을 설계</li>
-        <li>약봉투 OCR과 심평원 DUR 공공데이터를 연동해 약물 상호작용·안전성 분석, TMap 무장애 보행 API로 계단 수를 최소화하는 길찾기 구현</li>
+        <li>약봉투 OCR + 심평원 DUR 공공데이터로 약물 안전성 분석, TMap 무장애 보행 API로 계단 최소화 길찾기 구현</li>
       </ul>
       <div class="tech"><b>Stack:</b> Python · Next.js · OpenAI API · Render &nbsp;|&nbsp; <b>Demo:</b> boyak-sable.vercel.app</div>
     </div>
@@ -222,23 +255,10 @@ section { margin-bottom: 15px; }
       </div>
       <div class="org">건강 질문에 문헌·트렌드 근거를 함께 제시하는 RAG 챗봇</div>
       <ul>
-        <li>LangChain + Chroma DB 기반 검색–생성 파이프라인 구축</li>
-        <li>검색 누락과 근거 없는 응답 사례를 확인하고, chunking·임베딩·벡터 검색 방식을 조정</li>
+        <li>LangChain + Chroma DB 기반 RAG를 구축하고, 검색 누락·근거 없는 응답 사례를 확인해 chunking·임베딩·검색 방식을 조정</li>
         <li>여기서 익힌 문헌 검색·청킹·근거 제시 방식이 MediPaw의 RAG 문진 설계로 이어졌습니다</li>
       </ul>
       <div class="tech"><b>Stack:</b> LangChain · Chroma DB · LLM</div>
-    </div>
-
-    <div class="item">
-      <div class="item-head">
-        <h3>데이터 분석 기초 프로젝트</h3>
-        <span class="period">부트캠프 초기</span>
-      </div>
-      <ul>
-        <li><b>OULAD 학습 이탈 예측</b> — Logistic Regression 모델링·군집 분석과 대시보드 시각화</li>
-        <li><b>지자체 유형별 자동차 분포 분석</b> — KLACI 데이터 크롤링·전처리 후 Streamlit 대시보드 시각화</li>
-      </ul>
-      <div class="tech"><b>Stack:</b> Python · scikit-learn · Streamlit</div>
     </div>
   </section>
 
@@ -247,13 +267,11 @@ section { margin-bottom: 15px; }
     <div class="item">
       <div class="item-head">
         <h3>Ruvbl1 is Essential for Ciliary Beating during <i>Xenopus laevis</i> Embryogenesis</h3>
-        <span class="period">2023.09</span>
+        <span class="period">SCI(E) · 2023.09</span>
       </div>
-      <div class="org">Development &amp; Reproduction (SCI(E))</div>
       <ul>
-        <li>Chan Young Kim* 외 (*공동 1저자) — DOI: 10.12717/DR.2023.27.3.159</li>
-        <li>공동 1저자로 실험 프로토콜 구축과 섬모 운동성 정량 분석을 담당</li>
-        <li>Ruvbl1 결손이 기저소체 극성을 교란해 섬모 유체 흐름을 감소시킴을 규명</li>
+        <li><i>Development &amp; Reproduction</i> 게재 · 공동 1저자로 실험 프로토콜 구축·섬모 운동성 정량 분석 담당</li>
+        <li>Ruvbl1 결손이 기저소체 극성을 교란해 섬모 유체 흐름을 감소시킴을 규명 · DOI: 10.12717/DR.2023.27.3.159</li>
       </ul>
     </div>
   </section>
@@ -262,12 +280,9 @@ section { margin-bottom: 15px; }
     <div class="sec-title">Education</div>
     <div class="item">
       <div class="item-head">
-        <h3>경북대학교 대학원 · 생화학 석사 (후생유전학 전공)</h3>
+        <h3>경북대학교 대학원 · 생화학 석사 (후생유전학 전공) · GPA 4.2 / 4.3</h3>
         <span class="period">2020.03 – 2022.02</span>
       </div>
-      <ul>
-        <li>비주류 모델(<i>Xenopus laevis</i>)의 실험 프로토콜을 구축하고 섬모 운동성을 정량 분석 (GPA 4.2 / 4.3)</li>
-      </ul>
     </div>
   </section>
 

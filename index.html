@@ -349,6 +349,8 @@ nav {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+  nav { flex-wrap: wrap; gap: 12px; }
+  .nav-links { flex-wrap: wrap; gap: 8px 16px; }
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 0; }
   .profile-img-wrapper { max-width: 280px; margin: 0 auto; }
   .project-card, .exp-item, .other-projects-grid { grid-template-columns: 1fr; gap: 24px; }
@@ -654,9 +656,44 @@ nav {
 
   <section id="other-projects">
     <h2 class="sec-title">Other Projects</h2>
-    <p class="sec-desc">바이오·헬스케어 도메인에서 AI 서비스 구현을 연습한 프로젝트입니다.</p>
+    <p class="sec-desc">해커톤·공모전 출품작과 팀 프로젝트입니다.</p>
 
     <div class="other-projects-grid">
+      <div class="mini-card">
+        <div class="badge-alert">Superb AI × BDAI 비전 해커톤 본선 진출</div>
+        <h4>PATCH RUN 🏃 — 러닝 중 도로 파손 제보 서비스<span class="role-tag own">1인 개발</span></h4>
+        <p>러너·산책자가 길에서 찍은 도로 파손 사진을 AI가 1차 판별하고, 운영자가 승인하면 행정동별 보수 우선순위로 집계되는 서비스입니다. 차량·드론 영상으로 파손을 자동 탐지하는 과제를, <b>러너가 발견해 찍어 올리고 AI는 1차 판별만 하는 구조</b>로 바꿨습니다.</p>
+        <ul class="project-bullets">
+          <li>RDD2022 2만여 장을 4,000장으로 큐레이션해 RF-DETR 객체 탐지 모델을 파인튜닝 — 학습에 쓰지 않은 홀드아웃 200장 기준 mAP@0.5 <strong>0.016(제로샷) → 0.29</strong></li>
+          <li>탐지 임계값은 운영자 검수 부담을 기준으로 F1이 가장 높은 0.5로, 얼굴·번호판 블러는 놓치는 비용이 커 0.15로 낮게 설정</li>
+          <li>촬영 → 도로 여부 → 파손 4종 탐지 → 비식별화 → 중복 판별(dHash·30m 반경·VLM 대조) → 운영자 승인까지 배포</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">RF-DETR</span><span class="tech-tag">Superb AI</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Next.js</span><span class="tech-tag">Supabase</span><span class="tech-tag">Vercel</span>
+        </div>
+        <div class="link-group">
+          <a href="https://patch-run.vercel.app" target="_blank" class="github-link">배포 링크 →</a>
+        </div>
+      </div>
+
+      <div class="mini-card">
+        <div class="badge-alert">2026 관광데이터 활용 공모전 본선 진출</div>
+        <h4>플레이 경주 🏛️ — 역할 기반 경주 여행 웹앱<span class="role-tag led">5인 팀</span></h4>
+        <p>신라 시대 역할(왕·학자·화랑 등)을 고르면 하루 코스를 추천받고, 방문 퀘스트·음성 도슨트·3D 캐릭터 꾸미기로 경주를 여행하는 웹앱입니다. 홈 화면과 관광 데이터, 다국어 처리를 맡았습니다.</p>
+        <ul class="project-bullets">
+          <li>한국관광공사 TourAPI로 관광지·행사 데이터를 수집해 DB에 적재하고 홈 화면 API를 설계·구현 (Django로 시작해 팀 백엔드에 맞춰 FastAPI로 이전)</li>
+          <li>이번 달 행사는 TourAPI를 실시간 조회하되, 짧은 캐시로 중복 호출을 막고 API 장애 시 저장된 행사로 대체</li>
+          <li>한국어·영어·일본어·중국어 지원 — 번역이 없는 항목은 한국어로 대체하고, 커뮤니티 글은 번역 버튼으로 LLM 번역 후 캐시</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-tag">FastAPI</span><span class="tech-tag">MySQL</span><span class="tech-tag">TourAPI</span><span class="tech-tag">OpenAI API</span><span class="tech-tag">Next.js</span><span class="tech-tag">Vercel</span>
+        </div>
+        <div class="link-group">
+          <a href="https://github.com/chaechae18/tourism-data-2026" target="_blank" class="github-link">GitHub →</a>
+          <a href="https://tourism-data-2026.vercel.app" target="_blank" class="github-link">배포 링크 →</a>
+        </div>
+      </div>
+
       <div class="mini-card">
         <div class="badge-alert">보건의료빅데이터 AI 창업경진대회 출품작</div>
         <h4>보약 (Boyak) 💊 — 시니어 헬스케어 서비스<span class="role-tag led">팀 리드</span></h4>
@@ -720,6 +757,10 @@ nav {
       <dt style="font-weight:700; color:var(--text-title); grid-column:1/-1; padding-top:8px;">Project Repositories</dt>
       <dt style="font-weight:700; color:var(--text-title);">MediPaw</dt>
       <dd><a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-FINAL-1Team" class="pdf-link">https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-FINAL-1Team</a></dd>
+      <dt style="font-weight:700; color:var(--text-title);">PATCH RUN</dt>
+      <dd>Demo: <a href="https://patch-run.vercel.app" class="pdf-link">https://patch-run.vercel.app</a></dd>
+      <dt style="font-weight:700; color:var(--text-title);">플레이 경주</dt>
+      <dd><a href="https://github.com/chaechae18/tourism-data-2026" class="pdf-link">https://github.com/chaechae18/tourism-data-2026</a> &nbsp;·&nbsp; Demo: <a href="https://tourism-data-2026.vercel.app" class="pdf-link">https://tourism-data-2026.vercel.app</a></dd>
       <dt style="font-weight:700; color:var(--text-title);">보약 (Boyak)</dt>
       <dd><a href="https://github.com/Chyoung812/boyak" class="pdf-link">https://github.com/Chyoung812/boyak</a> &nbsp;·&nbsp; Demo: <a href="https://boyak-sable.vercel.app/" class="pdf-link">https://boyak-sable.vercel.app/</a></dd>
       <dt style="font-weight:700; color:var(--text-title);">BioRAG</dt>

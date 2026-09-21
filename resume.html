@@ -215,8 +215,8 @@ section { margin-bottom: 15px; }
       <div class="org">러너가 발견해 올리고 AI가 1차 판별하는 도로 파손 제보 서비스 · Superb AI × BDAI 비전 해커톤 본선 진출</div>
       <ul>
         <li>RDD2022 2만여 장을 4,000장으로 큐레이션(오탐 원인은 hard negative로 포함)해 RF-DETR 파인튜닝, 한 번에 한 변수씩 3회 학습<br>→ 학습에 쓰지 않은 홀드아웃 200장 기준 <b>mAP@0.5 0.016(제로샷) → 0.29</b>, 평균 추론 513ms</li>
-        <li>탐지는 운영자 검수 부담을 고려해 F1 최대값(0.5)을, 얼굴·번호판 블러는 누락 방지를 위해 0.15를 적용</li>
-        <li>도로 여부 → 파손 4종 탐지 → 비식별화 → 중복 판별(dHash·30m 반경·VLM 대조) → 운영자 승인 → 행정동별 우선순위 CSV까지 배포</li>
+        <li>탐지 임계값은 F1이 최대가 되는 0.5로 설정해 운영자 검수 부담을 고려했고, 얼굴·번호판 블러는 누락 방지를 위해 0.15를 적용</li>
+        <li>도로 여부 → 파손 4종 탐지 → 비식별화 → 중복 판별(dHash·30m 반경·VLM 대조) → 운영자 승인 → 행정동별 우선순위 CSV까지 전체 파이프라인 구현</li>
       </ul>
       <div class="tech"><b>Stack:</b> RF-DETR · Superb AI · FastAPI · Next.js · Supabase · Vercel &nbsp;|&nbsp; <b>Demo:</b> patch-run.vercel.app</div>
     </div>

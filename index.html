@@ -665,11 +665,11 @@ section { padding: 64px 0; }
       <div class="mini-card">
         <div class="badge-alert">Superb AI × BDAI 비전 해커톤 본선 진출</div>
         <h4>PATCH RUN 🏃 — 러닝 중 도로 파손 제보 서비스<span class="role-tag own">1인 개발</span></h4>
-        <p>러너·산책자가 길에서 찍은 도로 파손 사진을 AI가 1차 판별하고, 운영자가 승인하면 행정동별 보수 우선순위에 반영되는 서비스입니다. 차량·드론 영상으로 파손을 자동 탐지하는 과제를, <b>러너가 발견해 찍어 올리고 AI는 1차 판별만 하는 구조</b>로 바꿨습니다.</p>
+        <p>러너·산책자가 길에서 찍은 도로 파손 사진을 AI가 1차 판별하고, 운영자가 승인하면 행정동별 보수 우선순위에 반영되는 서비스입니다. 차량·드론 영상 기반 자동 탐지 과제를, <b>러너가 직접 촬영하고 AI가 1차 판별하는 제보 구조</b>로 재설계했습니다.</p>
         <ul class="project-bullets">
           <li>RDD2022 2만여 장을 4,000장으로 큐레이션해 RF-DETR 객체 탐지 모델을 파인튜닝 — 학습에 쓰지 않은 홀드아웃 200장 기준 mAP@0.5 <strong>0.016(제로샷) → 0.29</strong></li>
-          <li>탐지 임계값은 운영자 검수 부담을 고려해 F1 최대값인 0.5로, 얼굴·번호판 블러는 누락 비용이 커 0.15로 낮게 설정</li>
-          <li>촬영 → 도로 여부 → 파손 4종 탐지 → 비식별화 → 중복 판별(dHash·30m 반경·VLM 대조) → 운영자 승인까지 배포</li>
+          <li>탐지 임계값은 F1이 최대가 되는 0.5로 설정해 운영자 검수 부담을 고려했고, 얼굴·번호판 블러는 누락 비용이 커 0.15로 낮게 설정</li>
+          <li>촬영 → 도로 여부 → 파손 4종 탐지 → 비식별화 → 중복 판별(dHash·30m 반경·VLM 대조) → 운영자 승인까지 전체 파이프라인 구현</li>
         </ul>
         <div class="tech-stack">
           <span class="tech-tag">RF-DETR</span><span class="tech-tag">Superb AI</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Next.js</span><span class="tech-tag">Supabase</span><span class="tech-tag">Vercel</span>
@@ -700,7 +700,7 @@ section { padding: 64px 0; }
       <div class="mini-card">
         <div class="badge-alert">보건의료빅데이터 AI 창업경진대회 출품작</div>
         <h4>보약 (Boyak) 💊 — 시니어 헬스케어 서비스<span class="role-tag led">PM</span></h4>
-        <p>약물 부작용, 병원비, 이동 장벽을 한 화면에서 확인할 수 있도록 OCR·공공데이터·무장애 길찾기를 연결한 서비스입니다. 공공데이터·OCR·길찾기 API를 연동한 프로토타입을 구현해 창업경진대회에 출품했습니다.</p>
+        <p>약물 부작용, 병원비, 이동 장벽을 한 화면에서 확인할 수 있도록 OCR·공공데이터·무장애 길찾기를 연결한 서비스입니다. OCR·공공데이터·길찾기 API를 결합한 프로토타입을 구현해 창업경진대회에 출품했습니다.</p>
         <ul class="project-bullets">
           <li>약봉투 OCR + 심평원 DUR 공공데이터를 연동해 약물 안전성 분석</li>
           <li>TMap 무장애 보행 API로 계단 수 최소화 길찾기 구현</li>
@@ -725,8 +725,8 @@ section { padding: 64px 0; }
           <span class="tech-tag">LangChain</span><span class="tech-tag">Chroma DB</span><span class="tech-tag">LLM</span>
         </div>
         <div class="link-group">
-          <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-3rd-4Team" target="_blank" class="github-link">GitHub →</a>
-          <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-4th-4Team" target="_blank" class="github-link">확장 버전 →</a>
+          <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-3rd-4Team" target="_blank" class="github-link">3차 GitHub →</a>
+          <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-4th-4Team" target="_blank" class="github-link">4차 GitHub →</a>
         </div>
       </div>
     </div>

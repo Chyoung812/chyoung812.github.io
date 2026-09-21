@@ -564,8 +564,8 @@ section { padding: 64px 0; }
       <h1>Bio × AI Engineer</h1>
       <p>
         생화학 석사와 CAR-T 세포치료제 연구를 거쳐, <b>바이오 연구와 헬스케어 실무 경험을 바탕으로 AI 서비스를 구현하는 엔지니어</b>입니다.
-        논문·질병·약물처럼 근거가 중요한 데이터를 다루며, <b>근거를 함께 제시하고 검증하는 RAG·멀티에이전트 기반 AI 서비스</b>를 구현해왔습니다.
-        동물병원 상담–문진–예약 흐름에서 RAG 문진, 멀티에이전트 라우팅, LLMOps 평가 대시보드까지 구현했습니다.
+        논문·질병·약물처럼 근거가 중요한 바이오·헬스케어 정보를 다루며, <b>근거를 함께 제시하고 검증하는 RAG·멀티에이전트 기반 AI 서비스</b>를 구현해왔습니다.
+        동물병원 상담–문진–예약 흐름에서 RAG 기반 문진, 멀티에이전트 라우팅, LLMOps 평가 대시보드까지 구현했습니다.
       </p>
       <div class="hero-links">
         <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
@@ -585,9 +585,9 @@ section { padding: 64px 0; }
     <div class="feature">
       <div class="badge-award">🏆 SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위</div>
       <h3 class="feature-name">MediPaw 🐾</h3>
-      <p class="feature-sub">LLM 멀티에이전트 동물병원 워크플로우 자동화</p>
-      <div class="project-meta">PM(5인) · LangGraph 라우팅 · RAG 문진 · LLMOps 평가 · AWS 배포 · 2026.04 – 06.26</div>
-      <p class="lead-line">전화 예약·종이 문진으로 운영되는 동물병원의 진료 흐름을, <b>보호자의 말 한마디로 상담부터 진료 기록까지 이어지는 하나의 AI 워크플로우</b>로 만들었습니다.</p>
+      <p class="feature-sub">LLM 기반 멀티에이전트 동물병원 워크플로우 자동화</p>
+      <div class="project-meta">PM(5인) · LangGraph 라우팅 · RAG 기반 문진 · LLMOps 평가 · AWS 배포 · 2026.04 – 06.26</div>
+      <p class="lead-line">전화 예약과 종이 문진 중심의 동물병원 진료 흐름을, <b>보호자의 말 한마디로 상담부터 진료 기록까지 이어지는 하나의 AI 워크플로우</b>로 만들었습니다.</p>
       <div class="pipeline">
         <span>상담</span><i>→</i><span>문진</span><i>→</i><span>예약</span><i>→</i><span>진료·처방 기록</span><i>→</i><span>경과관리</span>
       </div>
@@ -600,13 +600,13 @@ section { padding: 64px 0; }
         <div class="stat"><div class="n">6</div><div class="l">AI 에이전트</div></div>
         <div class="stat"><div class="n">124</div><div class="l">REST API 엔드포인트</div></div>
         <div class="stat"><div class="n">100%</div><div class="l">E2E 라우팅 정확도</div></div>
-        <div class="stat"><div class="n">3.7턴</div><div class="l">평균 대화 완료</div></div>
+        <div class="stat"><div class="n">3.7턴</div><div class="l">평균 문진 완료 턴</div></div>
       </div>
       <div class="bullet-label">핵심 구현</div>
       <p class="scope">
         <b>직접 구현 ① 워크플로우·웹앱</b> — 보호자 웹앱을 주로 맡아, 수의사·운영자 웹앱까지 이어지는 진료 여정 흐름 구현<br>
-        <b>② RAG·멀티에이전트</b> — LangGraph 하이브리드 라우팅 · pgvector 기반 RAG 문진<br>
-        <b>③ 평가·배포</b> — LLMOps 평가 대시보드 · pytest/GitHub Actions 회귀 게이트 · AWS 배포
+        <b>② RAG·멀티에이전트</b> — LangGraph 기반 하이브리드 라우팅 · RAG 기반 문진(pgvector)<br>
+        <b>③ 평가·배포</b> — LLMOps 평가 대시보드 · pytest/GitHub Actions 기반 CI 게이트 · AWS 배포
       </p>
       <div class="print-only">
       <div class="decision">
@@ -622,7 +622,7 @@ section { padding: 64px 0; }
           </div>
           <div class="decision-step pick">
             <div class="step-k">선택 · 규칙+LLM</div>
-            <p>버튼·예약슬롯처럼 <strong>정형 입력은 deterministic rule</strong>로 즉시 처리하고, <strong>자유 발화만 LLM router</strong>가 판단합니다. ‘예약 전’ 단계에선 ‘예약 변경’ 같은 <strong>후보 에이전트를 빼</strong>, 라우터가 잘못 고를 여지를 없앴습니다.</p>
+            <p>버튼·예약슬롯처럼 <strong>정형 입력은 deterministic rule</strong>로 즉시 처리하고, <strong>자유 발화만 LLM router</strong>가 판단합니다. ‘예약 전’ 단계에선 ‘예약 변경’ 같은 <strong>후보 에이전트를 빼</strong>, 라우터의 오분류 가능성을 구조적으로 제한했습니다.</p>
           </div>
           <div class="decision-step">
             <div class="step-k">검증</div>
@@ -631,18 +631,18 @@ section { padding: 64px 0; }
         </div>
         <div class="decision-result">
           <span class="dr-k">결과</span>
-          <p>규칙으로 판별되는 요청은 <strong>LLM 호출 없이 즉시</strong> 처리하고, 애매한 발화만 LLM이 판단하도록 했습니다. 그 결과 <strong>불필요한 LLM 호출을 줄여 지연·비용 증가 가능성을 낮추면서</strong>, 라우팅 오분류도 줄였습니다.</p>
+          <p>규칙으로 판별되는 요청은 <strong>LLM 호출 없이 즉시</strong> 처리하고, 애매한 발화만 LLM이 판단하도록 했습니다. 그 결과 <strong>불필요한 LLM 호출을 줄여 지연·비용 증가 가능성을 낮추면서</strong>, 라우팅 오분류 가능성도 함께 줄였습니다.</p>
         </div>
       </div>
 
       <div class="project-img">
         <img src="images/medipaw/23-admin-eval-dashboard-top.webp" alt="운영자용 LLMOps 평가 대시보드 — 종합 점수, PASS/WARN 판정 분포, 점수 추이, Top WARN 자동 집계" onerror="this.style.display='none'">
       </div>
-      <div class="project-cap">▲ <b>운영자용 LLMOps 평가 대시보드</b> — 케이스별 PASS/WARN 판정 · 종합 점수 추이 · Top WARN 자동 집계로 <span class="cap-flow">에이전트 품질을 감각이 아닌 지표로 회귀 추적</span><br><b>Overall score 93.7%</b> = 라우팅·문진·예약·차트 응답의 자동 평가 통합 점수</div>
+      <div class="project-cap">▲ <b>운영자용 LLMOps 평가 대시보드</b> — 케이스별 PASS/WARN 판정 · 종합 점수 추이 · Top WARN 자동 집계로 <span class="cap-flow">에이전트 품질을 지표 기반으로 회귀 추적</span><br><b>Overall score 93.7%</b> = 라우팅·문진·예약·차트 응답의 자동 평가 통합 점수</div>
 
       <div class="bullet-label">그 밖에 직접 해결한 것</div>
       <ul class="project-bullets">
-        <li><strong>① RAG 신뢰성</strong> — 할루시네이션 3중 방어(유사도 임계값 0.60 미만 차단 + RAGAS 평가 + CI 회귀 게이트)로 근거 없는 답변을 차단하고, 문진 후속 질문이 맥락에 맞게 이어지는 비율을 <strong>58 → 72%</strong>로 개선 (이전 문진 맥락과 관련 있는 후속 질문 수 / 전체 후속 질문 수)</li>
+        <li><strong>① RAG 신뢰성</strong> — 할루시네이션 3중 방어(유사도 임계값 0.60 미만 차단 + RAGAS 평가 + CI 게이트)로 근거 없는 답변을 억제하고, 문진 후속 질문이 맥락에 맞게 이어지는 비율을 <strong>58 → 72%</strong>로 개선 (이전 문진 맥락과 관련 있는 후속 질문 수 / 전체 후속 질문 수)</li>
         <li><strong>② LLMOps 평가</strong> — 위 라우팅 평가셋을 포함한 <strong>약 1,000건을 출처 인용·faithfulness·안전성 기준으로 자동 평가</strong>하고 대시보드에서 회귀 추적 → PetEVAL 기반 E2E 200건 중 문진 완료 199/200</li>
         <li><strong>③ 배포·운영 자동화</strong> — AWS·Docker·Caddy 자동 HTTPS로 배포 환경을 구성하고, GitHub Actions에서 회귀 테스트 실패 시 merge를 차단</li>
       </ul>
@@ -716,7 +716,7 @@ section { padding: 64px 0; }
 
       <div class="mini-card">
         <h4>BioRAG — 건강 트렌드 질의응답 챗봇</h4>
-        <p>건강 질문에 문헌·트렌드 근거를 함께 제시하는 RAG 챗봇입니다. <b>BioRAG에서 경험한 문헌 검색·청킹·근거 제시 방식을 MediPaw의 RAG 문진 설계에 적용했습니다.</b></p>
+        <p>건강 질문에 문헌·트렌드 근거를 함께 제시하는 RAG 챗봇입니다. <b>BioRAG에서 경험한 문헌 검색·청킹·근거 제시 방식을 MediPaw의 RAG 기반 문진 설계에 적용했습니다.</b></p>
         <ul class="project-bullets">
           <li>LangChain + Chroma DB 기반 RAG 파이프라인 구축</li>
           <li>검색 누락과 근거 없는 응답 사례를 확인하고, chunking·임베딩·벡터 검색 방식을 조정</li>
@@ -771,7 +771,7 @@ section { padding: 64px 0; }
         <div class="exp-period">2020.03 — 2022.02</div>
         <div class="exp-content">
           <h4>경북대학교 대학원 · 생화학 석사 (후생유전학 전공)</h4>
-          <p>비주류 모델(Xenopus laevis)의 실험 프로토콜을 구축하고 섬모 운동성을 정량 분석했습니다 (GPA 4.2 / 4.3). 실험 조건과 결과를 구분해 검증하는 경험이 이후 AI 응답 평가와 실패 케이스 분석으로 이어졌습니다.</p>
+          <p>Xenopus laevis 모델의 실험 프로토콜을 구축하고 섬모 운동성을 정량 분석했습니다 (GPA 4.2 / 4.3). 실험 조건과 결과를 구분해 검증하는 경험이 이후 AI 응답 평가와 실패 케이스 분석으로 이어졌습니다.</p>
         </div>
       </div>
     </div>

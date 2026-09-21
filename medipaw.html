@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MediPaw — 프로젝트 상세 · 김찬영</title>
-<meta name="description" content="LLM 멀티에이전트 동물병원 진료 워크플로우 자동화 플랫폼 MediPaw 프로젝트 상세. SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위." />
+<meta name="description" content="LLM 기반 멀티에이전트 동물병원 진료 워크플로우 자동화 플랫폼 MediPaw 프로젝트 상세. SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위." />
 <link rel="canonical" href="https://chyoung812.github.io/medipaw.html" />
-<meta property="og:title" content="MediPaw — LLM 멀티에이전트 동물병원 플랫폼 (최종 프로젝트 1위)" />
-<meta property="og:description" content="LangGraph 멀티에이전트 라우터 · RAG 문진 · LLMOps 평가 대시보드 · AWS CI/CD" />
+<meta property="og:title" content="MediPaw — LLM 기반 멀티에이전트 동물병원 플랫폼 (최종 프로젝트 1위)" />
+<meta property="og:description" content="LangGraph 멀티에이전트 라우터 · RAG 기반 문진 · LLMOps 평가 대시보드 · AWS CI/CD" />
 <meta property="og:image" content="https://chyoung812.github.io/images/medipaw/12c-chatbot-conversation.png" />
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
@@ -136,8 +136,8 @@
 
 <header class="hero"><div class="wrap">
   <span class="award">🏆 SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위</span>
-  <h1>MediPaw — LLM <span class="accent">멀티에이전트</span><br/>동물병원 워크플로우 자동화</h1>
-  <p class="sub">보호자 AI 상담 → 문진 → 예약 → 진료(EMR·처방) → 경과 관리까지 동물병원 진료 워크플로우를 연결·자동화한 플랫폼입니다. 보호자·수의사·운영자 3개 웹앱과 LangGraph 오케스트레이터, RAG 문진, AWS 자동 배포 파이프라인으로 서비스를 설계·구현했습니다.</p>
+  <h1>MediPaw — LLM 기반 <span class="accent">멀티에이전트</span><br/>동물병원 워크플로우 자동화</h1>
+  <p class="sub">보호자 AI 상담 → 문진 → 예약 → 진료(EMR·처방) → 경과 관리까지 동물병원 진료 워크플로우를 연결·자동화한 플랫폼입니다. 보호자·수의사·운영자 3개 웹앱과 LangGraph 오케스트레이터, RAG 기반 문진, AWS 자동 배포 파이프라인으로 서비스를 설계·구현했습니다.</p>
   <div class="meta">
     <span class="chip"><b>김찬영</b> · PM · Full Stack·AI·DevOps</span>
     <span class="chip">5인 · 2026.04 – 06.26</span>
@@ -163,14 +163,14 @@
 <section id="problem" style="background:#fff;border-bottom:1px solid var(--line)"><div class="wrap">
   <div class="eyebrow">Problem</div>
   <div class="h2">문제 정의</div>
-  <p class="lead"><b>전화 예약·종이 문진</b>으로 운영되는 동물병원에서는 보호자가 “지금 병원에 가야 할 응급인지”를 스스로 판단하기 어렵습니다. 수의사는 진료와 행정을 동시에 떠안고, 상담·문진·예약·진료·처방·경과 기록이 서로 끊겨 있습니다.</p>
+  <p class="lead"><b>전화 예약·종이 문진</b>으로 운영되는 동물병원에서는 보호자가 “지금 병원에 가야 할 응급인지”를 스스로 판단하기 어렵습니다. 수의사는 진료와 행정 업무를 동시에 처리해야 하고, 상담·문진·예약·진료·처방·경과 기록이 서로 끊겨 있습니다.</p>
   <div class="grid2">
     <div class="card"><div class="k">Pain</div><h3>흩어진 진료 여정</h3>
       <ul><li>상담 → 예약 → 진료 → 처방 → 경과가 각각 다른 채널·종이로 단절</li>
       <li>보호자는 응급도 판단이 어렵고, 수의사는 사전 정보 없이 진료 시작</li></ul></div>
     <div class="card"><div class="k">Solution</div><h3>해결 방향</h3>
-      <ul><li>보호자의 말 한마디가 상담·문진·예약·처방까지 <b>끊김 없이</b> 이어지도록 설계</li>
-      <li>응급은 즉시 내원 유도, 일반은 RAG 문진으로 사전 정보를 모아 수의사에게 전달</li></ul></div>
+      <ul><li>보호자의 말 한마디가 상담·문진·예약·처방까지 이어지도록 설계</li>
+      <li>응급은 즉시 내원 유도, 일반은 RAG 기반 문진으로 사전 정보를 모아 수의사에게 전달</li></ul></div>
   </div>
 </div></section>
 
@@ -184,9 +184,9 @@
     <div class="metric"><div class="num">6</div><div class="lbl">AI 에이전트</div></div>
     <div class="metric"><div class="num">142</div><div class="lbl">회귀 테스트<br/>+ CI 게이트</div></div>
     <div class="metric"><div class="num">100%</div><div class="lbl">E2E 라우팅 정확도</div></div>
-    <div class="metric"><div class="num">3.7턴</div><div class="lbl">평균 대화 완료<br/>(간결성)</div></div>
-    <div class="metric"><div class="num">4.38</div><div class="lbl">종합 QA 평가<br/>(가중 /5)</div></div>
-    <div class="metric"><div class="num">19,206</div><div class="lbl">RAG 문진 문서</div></div>
+    <div class="metric"><div class="num">3.7턴</div><div class="lbl">평균 문진 완료 턴</div></div>
+    <div class="metric"><div class="num">4.38</div><div class="lbl">종합 QA 평가<br/>(가중 평균 / 5)</div></div>
+    <div class="metric"><div class="num">19,206</div><div class="lbl">RAG 기반 문진 문서</div></div>
     <div class="metric"><div class="num">5</div><div class="lbl">자동 HTTPS 서브도메인</div></div>
   </div>
 </div></section>
@@ -238,7 +238,7 @@
       <ul>
         <li>모든 발화를 LLM이 분류하니 비슷한 요청을 <b>매번 다르게(일관되지 않게) 분류</b></li>
         <li>실제로 <b>“예약 변경” 요청이 문진 상담으로 넘어가</b>, 보호자가 증상 질문에 답하다 예약을 못 바꾸는 흐름이 생김</li>
-        <li>턴마다 LLM 호출 → 지연·비용 증가, “왜 그 판단을 했는지” 근거 추적도 어려움</li>
+        <li>턴마다 LLM 호출 → 지연·비용 증가, 판단 근거를 추적하기도 어려움</li>
       </ul>
     </div>
     <div class="card" style="border-left:4px solid var(--pine)">
@@ -246,40 +246,40 @@
       <h3>해결 방법</h3>
       <ul>
         <li><b>명확한 입력은 규칙으로</b> 즉시 분기, <b>애매한 자연어만 LLM</b>에 위임</li>
-        <li>예약 전/후(phase)로 <b>후보 에이전트를 제한</b> → 해당 단계에 없는 에이전트로의 오분류를 구조적으로 차단</li>
+        <li>예약 전/후(phase)로 <b>후보 에이전트를 제한</b> → 해당 단계에 없는 에이전트로의 오분류 가능성을 구조적으로 제한</li>
         <li>SessionContext에 phase·slot·memo를 영속화해 멀티턴 맥락 유지</li>
       </ul>
     </div>
   </div>
-  <div class="result"><span class="k">결과</span><p>약 <b>1,000건 종합 QA에서 E2E 라우팅 정확도 100%</b>, 평균 <b>3.7턴</b>으로 간결하게 대화 완료. 위험 카테고리 안전성 판정 <b>fail 0건</b>.</p>
+  <div class="result"><span class="k">결과</span><p>약 <b>1,000건 종합 QA에서 E2E 라우팅 정확도 100%</b>, 평균 <b>3.7턴</b>에 문진 완료. 위험 카테고리 안전성 판정 <b>fail 0건</b>.</p>
   </div>
 </div></section>
 
 <section id="contrib"><div class="wrap">
   <div class="eyebrow">My Contribution</div>
   <div class="h2">내가 직접 설계·구현한 것</div>
-  <p class="lead">멀티에이전트·RAG 아키텍처를 설계하고, 평가 자동화와 인프라/배포를 맡았으며, 보호자 앱 UX 개선과 풀스택 전 영역으로 확장했습니다.</p>
+  <p class="lead">멀티에이전트·RAG 아키텍처를 설계하고, 평가 자동화와 인프라/배포를 맡았으며, 보호자 앱 UX 개선부터 풀스택 구현까지 담당했습니다.</p>
   <div class="grid2">
     <div class="card"><div class="k">01 · MULTI-AGENT</div><h3>멀티에이전트 오케스트레이션</h3>
       <ul><li>규칙 + LLM <b>하이브리드 라우팅</b> 설계 (명확=규칙 / 애매=LLM)</li>
       <li>예약 전/후(phase)로 후보 제한 → 해당 단계에 없는 에이전트로의 오분류 차단</li>
       <li>SessionContext로 멀티턴 상태 영속화</li>
       <li>후반 운영기에는 Follow-up Filter 에이전트를 담당</li></ul></div>
-    <div class="card"><div class="k">02 · RAG</div><h3>RAG 문진 + 할루시네이션 방어</h3>
+    <div class="card"><div class="k">02 · RAG</div><h3>RAG 기반 문진 + 할루시네이션 방어</h3>
       <ul><li><span class="mono">text-embedding-3-small</span>(1536d) + pgvector 초기 설계</li>
       <li>유사도 <b>0.60 임계값</b> · LLM 쿼리 확장(확장 실패 시 원래 질문으로 검색)</li>
       <li>3중 방어: 임계값 + RAGAS + CI 게이트</li></ul></div>
     <div class="card"><div class="k">03 · UX</div><h3>보호자 앱 UX · 응급 대화</h3>
-      <ul><li>동료가 구현한 초기 UI를 <b>보호자 화면 최종본으로 리디자인</b> + 전체 UX 설계</li>
+      <ul><li>동료가 구현한 초기 UI를 <b>보호자 화면 최종본으로 리디자인</b>하고 전체 UX를 설계</li>
       <li>기계적 "병원 가세요" 대신 <b>공감 → 즉시 내원 → 빠른 예약 제안</b></li>
-      <li>안전 회귀(진단 단정·자가처치) <b>0건</b> 유지</li></ul></div>
+      <li>안전성 회귀(진단 단정·자가처치) <b>0건</b> 유지</li></ul></div>
     <div class="card"><div class="k">04 · EVALUATION</div><h3>평가 자동화 · 품질 검증</h3>
       <ul><li>약 <b>1,000건 종합 QA</b> 자동화 (PetEVAL 200 + 지식iN 안전성 684 + 메모리 125 + E2E)</li>
       <li>→ <b>E2E 라우팅 정확도 100%</b> · 문진 완료 <b>199/200</b> · 평균 <b>3.7턴</b> · 종합 가중 <b>4.38/5</b></li>
-      <li>위험 카테고리(약물 투여·민간요법·학대) <b>LLM 안전성 판정 fail 0건</b> · 운영자 대시보드로 회귀 추적</li></ul></div>
-    <div class="card"><div class="k">05 · FULL STACK</div><h3>상담 → 진료 끊김 없는 연결</h3>
+      <li>위험 카테고리(약물 투여·민간요법·학대) <b>LLM 안전성 판정 fail 0건</b> · 운영자 대시보드에서 품질 회귀 추적</li></ul></div>
+    <div class="card"><div class="k">05 · FULL STACK</div><h3>상담 → 진료까지 이어지는 워크플로우</h3>
       <ul><li>SSE 스트리밍 채팅 → 예약 슬롯 → EMR → <b>처방전 자동 생성</b></li>
-      <li>입점 심사 → "페이지 등록" 한 번에 병원/계정 자동 발행</li>
+      <li>입점 승인 → 페이지 등록 한 번으로 병원·계정 자동 발행</li>
       <li>상담 대화·제목까지 다국어 번역</li></ul></div>
     <div class="card"><div class="k">06 · DEVOPS</div><h3>인프라 · CI/CD · 배포</h3>
       <ul><li>AWS EC2·RDS·S3·CloudFront + Docker Compose</li>
@@ -291,14 +291,14 @@
 <section id="eval" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
   <div class="eyebrow">Results</div>
   <div class="h2">감각이 아니라 지표로</div>
-  <p class="lead">Hugging Face에 공개된 <b>해외 실제 동물병원 문진·증상 답변 데이터셋</b> 200건으로 평가셋을 구성, 대화 UX v2 개선 전후를 정량 비교했습니다. 안전 회귀 없이 연결률·표현 다양성을 끌어올렸습니다.</p>
+  <p class="lead">Hugging Face에 공개된 <b>해외 실제 동물병원 문진·증상 답변 데이터셋</b> 200건으로 평가셋을 구성하고, 안전성 회귀를 확인하면서 대화 UX v2 개선 전후의 연결률과 표현 다양성 변화를 정량 비교했습니다.</p>
   <table>
     <tr><th>지표</th><th>개선 전</th><th>개선 후</th></tr>
     <tr><td>질문 연결률</td><td class="before">58%</td><td class="after">72%</td></tr>
     <tr><td>예약 고정문구(천편일률)</td><td class="before">199건</td><td class="after">0건 · 표현 다양성 1→29</td></tr>
     <tr><td>공감어 연속 2턴 반복</td><td class="before">21건</td><td class="after">6건</td></tr>
     <tr><td>마무리 증상 나열형</td><td class="before">122건</td><td class="after">33건</td></tr>
-    <tr><td>안전 회귀(진단단정·자가처치 등)</td><td class="before">—</td><td class="after">0건 (무회귀)</td></tr>
+    <tr><td>안전성 회귀(진단 단정·자가처치 등)</td><td class="before">—</td><td class="after">0건</td></tr>
   </table>
 </div></section>
 
@@ -313,7 +313,7 @@
     style="width:100%;border:1px solid var(--line);border-radius:16px;display:block;background:#000;margin-bottom:8px">
     <source src="videos/medipaw-demo.mp4" type="video/mp4">
   </video>
-  <p style="color:var(--slate);font-size:13px;margin-bottom:8px">보호자 상담 → 문진 → 예약 → 진료(EMR) → 처방까지 끊김 없는 전체 워크플로우</p>
+  <p style="color:var(--slate);font-size:13px;margin-bottom:8px">보호자 상담 → 문진 → 예약 → 진료(EMR) → 처방까지 이어지는 전체 워크플로우</p>
 
   <div class="galtitle">핵심 화면</div>
   <div class="shots">
@@ -351,7 +351,7 @@
 
 <footer><div class="wrap">
   <p><a href="index.html" style="color:var(--pine);font-weight:700">← 포트폴리오로 돌아가기</a></p>
-  <p style="margin-top:10px"><b>MediPaw</b> · LLM 멀티에이전트 동물병원 진료 워크플로우 자동화 · 김찬영</p>
+  <p style="margin-top:10px"><b>MediPaw</b> · LLM 기반 멀티에이전트 동물병원 진료 워크플로우 자동화 · 김찬영</p>
 </div></footer>
 
 <div class="lb" id="lb"><img id="lbimg" src="" alt=""/></div>

@@ -49,14 +49,30 @@
   .h2{font-size:28px;font-weight:800;margin:8px 0 8px;letter-spacing:-.5px}
   .lead{color:var(--slate);font-size:16px;max-width:760px;margin-bottom:28px}
 
-  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
   .metric{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px;text-align:center}
-  .metric .num{font-size:32px;font-weight:800;color:var(--pine);line-height:1}
+  .metric .num{font-size:30px;font-weight:800;color:var(--pine);line-height:1}
   .metric .lbl{margin-top:9px;font-size:13px;color:var(--slate);font-weight:600}
-  @media(max-width:680px){.metrics{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:900px){.metrics{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){.metrics{grid-template-columns:repeat(2,1fr)}}
 
   .arch{background:var(--ink);color:#e2e8f0;border-radius:16px;padding:26px;overflow:auto}
   .arch pre{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.7;white-space:pre}
+  .diagram{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px 20px;display:flex;flex-direction:column;align-items:center}
+  .d-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;max-width:640px}
+  .d-box{border:1px solid var(--line);border-radius:10px;padding:10px 12px;text-align:center;background:#fff;font-size:14px;font-weight:700;color:var(--ink);min-width:0}
+  .d-box small{display:block;font-weight:500;color:var(--slate);font-size:12px;margin-top:2px}
+  .d-box.core{border-color:var(--pine);background:#eef6f3;width:100%;max-width:420px}
+  .d-arrow{color:#94a3b8;font-size:12px;font-weight:600;padding:6px 0;text-align:center;line-height:1.4}
+  .d-arrow::before{content:"↓";display:block;font-size:16px;color:var(--slate)}
+  .d-agents{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;width:100%;align-items:start}
+  .d-rag{margin-top:8px;border:1px dashed var(--pine);border-radius:8px;padding:6px 8px;font-size:12.5px;color:var(--pine-dark);font-weight:700}
+  .d-rag small{font-size:11.5px}
+  .d-infra{margin-top:20px;border-top:1px dashed var(--line);padding-top:14px;width:100%;font-size:13px;color:var(--slate);line-height:1.8}
+  .d-infra b{color:var(--ink)}
+  @media(max-width:760px){.d-agents{grid-template-columns:repeat(2,minmax(0,1fr))}.d-row{gap:6px}.d-row .d-box{padding:8px 4px;font-size:13px}.diagram{padding:20px 14px}}
+  .result{display:flex;gap:14px;align-items:baseline;margin-top:16px;background:#eef6f3;border:1px solid #bfe3d8;border-radius:12px;padding:14px 18px;color:var(--pine-dark);font-size:14.5px}
+  .result .k{flex:0 0 auto;font-size:12px;font-weight:800;letter-spacing:1px;color:var(--pine)}
   .tag{display:inline-block;background:#eef6f3;color:var(--pine);font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;margin:3px 4px 0 0}
 
   .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -77,6 +93,9 @@
   th{background:#f1f7f5;font-weight:700;color:var(--pine);font-size:13px}
   td.before{color:#94a3b8}
   td.after{color:var(--pine);font-weight:800}
+  td.after::before{content:"→ ";color:#94a3b8;font-weight:600}
+  td.before,th{white-space:nowrap}
+  @media(max-width:560px){th,td{padding:11px 10px;font-size:13.5px}}
   tr:last-child td{border-bottom:none}
 
   .galtitle{font-size:16px;font-weight:800;color:var(--ink);margin:32px 0 14px;padding-left:12px;border-left:4px solid var(--pine)}
@@ -88,9 +107,13 @@
   .shot .cap{padding:11px 15px;font-size:13.5px;font-weight:600;color:var(--slate)}
   .shot .cap b{color:var(--ink)}
   .shot .cap .hint{display:block;margin-top:2px;font-size:11.5px;font-weight:500;color:#94a3b8}
+  .shots.compact{grid-template-columns:repeat(4,1fr);gap:12px}
+  .shots.compact .shot img{height:150px}
+  .shots.compact .shot .cap{padding:9px 11px;font-size:12.5px}
+  @media(max-width:900px){.shots.compact{grid-template-columns:repeat(2,1fr)}}
   .shot.big{grid-column:span 2}
   .shot.big img{height:380px}
-  @media(max-width:760px){.shot.big{grid-column:span 1}.shot img{height:200px}.shot.big img{height:240px}}
+  @media(max-width:760px){.shot.big{grid-column:span 1}.shot img{height:200px}.shot.big img{height:240px}.shots.compact .shot img{height:130px}}
 
   .lb{position:fixed;inset:0;background:rgba(15,23,42,.92);display:none;align-items:center;justify-content:center;z-index:100;padding:32px;cursor:zoom-out}
   .lb.open{display:flex}
@@ -123,7 +146,7 @@
     <a class="btn primary" href="#shots">서비스 화면 보기</a>
     <a class="btn ghost" href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN25-FINAL-1Team" target="_blank">GitHub Repo ↗</a>
   </div>
-  <div class="note">⚠️ 라이브 데모(<span class="mono">*.medipaw.app</span>)는 캠프 종료로 곧 내려갑니다. 아래 화면은 종료 전 실제 서비스에서 캡처했습니다.</div>
+  <div class="note">⚠️ 라이브 데모(<span class="mono">*.medipaw.app</span>)는 캠프 종료로 운영이 끝났습니다. 아래 화면은 운영 당시 실제 서비스에서 캡처했습니다.</div>
 </div></header>
 
 <section id="loop" style="padding:36px 0 8px"><div class="wrap">
@@ -139,13 +162,13 @@
 
 <section id="problem" style="background:#fff;border-bottom:1px solid var(--line)"><div class="wrap">
   <div class="eyebrow">Problem</div>
-  <div class="h2">왜 만들었나</div>
+  <div class="h2">문제 정의</div>
   <p class="lead"><b>전화 예약·종이 문진</b>으로 운영되는 동물병원에서는 보호자가 “지금 병원에 가야 할 응급인지”를 스스로 판단하기 어렵습니다. 수의사는 진료와 행정을 동시에 떠안고, 상담·문진·예약·진료·처방·경과 기록이 서로 끊겨 있습니다.</p>
   <div class="grid2">
-    <div class="card"><div class="k">PAIN</div><h3>흩어진 진료 여정</h3>
+    <div class="card"><div class="k">Pain</div><h3>흩어진 진료 여정</h3>
       <ul><li>상담 → 예약 → 진료 → 처방 → 경과가 각각 다른 채널·종이로 단절</li>
       <li>보호자는 응급도 판단이 어렵고, 수의사는 사전 정보 없이 진료 시작</li></ul></div>
-    <div class="card"><div class="k">SOLUTION</div><h3>하나의 AI 워크플로우</h3>
+    <div class="card"><div class="k">Solution</div><h3>해결 방향</h3>
       <ul><li>보호자의 말 한마디가 상담·문진·예약·처방까지 <b>끊김 없이</b> 이어지도록 설계</li>
       <li>응급은 즉시 내원 유도, 일반은 RAG 문진으로 사전 정보를 모아 수의사에게 전달</li></ul></div>
   </div>
@@ -172,25 +195,29 @@
   <div class="eyebrow">Architecture</div>
   <div class="h2">보호자의 말이 처리되는 흐름</div>
   <p class="lead">보호자 메시지는 FastAPI가 SSE 스트림으로 받고, LangGraph 오케스트레이터가 매 턴 담당 에이전트를 결정합니다. 명확한 입력은 규칙으로, 애매한 자연어는 LLM이 분류합니다.</p>
-  <div class="arch"><pre>
-   보호자 (React) ──SSE──▶  ┌──────────────────────────┐
-   수의사 (React) ────────▶ │   FastAPI Chat API        │
-   운영자 (React) ────────▶ │  Async SQLAlchemy / JWT   │
-                            └────────────┬─────────────┘
-                                         │  SessionContext (phase·slot·memo)
-                                         ▼
-                            ┌──────────────────────────┐
-                            │   LangGraph Orchestrator  │  규칙 우선 → 애매하면 LLM
-                            └────────────┬─────────────┘
-         ┌───────────┬──────────────────┼───────────────┬─────────────┐
-         ▼           ▼                  ▼               ▼             ▼
-     Reception     Triage            Schedule        Follow-up    Prescription
-    (병원/케어)  (문진·응급분류)      (예약 슬롯)     (경과·재예약)   (처방 초안)
-                    │
-                    ▼  pgvector RAG (유사 상담사례, 유사도 ≥ 0.60)
-
-   Infra:  AWS EC2·RDS·S3·CloudFront / Docker Compose / Nginx / Caddy(자동 HTTPS)
-           GitHub Actions CI·CD (main 머지 → 자동 배포) · pytest 게이트 · Langfuse 계측</pre></div>
+  <div class="diagram">
+    <div class="d-row">
+      <div class="d-box">보호자<small>React · SSE</small></div>
+      <div class="d-box">수의사<small>React</small></div>
+      <div class="d-box">운영자<small>React</small></div>
+    </div>
+    <div class="d-arrow"></div>
+    <div class="d-box core">FastAPI Chat API<small>Async SQLAlchemy / JWT</small></div>
+    <div class="d-arrow">SessionContext (phase·slot·memo)</div>
+    <div class="d-box core">LangGraph Orchestrator<small>규칙 우선 → 애매하면 LLM</small></div>
+    <div class="d-arrow"></div>
+    <div class="d-agents">
+      <div class="d-box">Reception<small>병원/케어</small></div>
+      <div class="d-box">Triage<small>문진·응급분류</small><div class="d-rag">pgvector RAG<small>유사 상담사례, 유사도 ≥ 0.60</small></div></div>
+      <div class="d-box">Schedule<small>예약 슬롯</small></div>
+      <div class="d-box">Follow-up<small>경과·재예약</small></div>
+      <div class="d-box">Prescription<small>처방 초안</small></div>
+    </div>
+    <div class="d-infra">
+      <b>Infra</b> · AWS EC2·RDS·S3·CloudFront / Docker Compose / Nginx / Caddy(자동 HTTPS)<br>
+      GitHub Actions CI·CD (main 머지 → 자동 배포) · pytest 게이트 · Langfuse 계측
+    </div>
+  </div>
   <div style="margin-top:18px">
     <span class="tag">LangGraph</span><span class="tag">FastAPI</span><span class="tag">Async SQLAlchemy</span>
     <span class="tag">pgvector RAG</span><span class="tag">OpenAI</span><span class="tag">Langfuse</span>
@@ -203,19 +230,20 @@
 <section id="decision"><div class="wrap">
   <div class="eyebrow">Deep Dive</div>
   <div class="h2">가장 어려웠던 결정 — 보호자의 말을 어느 에이전트가 맡을까</div>
-  <p class="lead">멀티에이전트에서 가장 오래 고민한 문제는 <b>라우팅</b>이었습니다. 보호자의 말을 어느 에이전트가 맡을지 잘못 정하면 그 뒤 문진·예약·처방이 전부 어긋납니다.</p>
+  <p class="lead">보호자의 말을 어느 에이전트가 맡느냐에 따라 이후 문진·예약·처방 흐름이 달라지기 때문에, <b>라우팅</b>을 가장 중요한 설계 문제로 봤습니다.</p>
   <div class="grid2" style="align-items:stretch">
     <div class="card" style="border-left:4px solid #cbd5e1">
       <div class="k" style="color:#94a3b8">시도 1 · 순수 LLM 라우팅</div>
-      <h3>왜 막혔나</h3>
+      <h3>한계</h3>
       <ul>
         <li>모든 발화를 LLM이 분류하니 비슷한 요청을 <b>매번 다르게(일관되지 않게) 분류</b></li>
+        <li>실제로 <b>“예약 변경” 요청이 문진 상담으로 넘어가</b>, 보호자가 증상 질문에 답하다 예약을 못 바꾸는 흐름이 생김</li>
         <li>턴마다 LLM 호출 → 지연·비용 증가, “왜 그 판단을 했는지” 근거 추적도 어려움</li>
       </ul>
     </div>
     <div class="card" style="border-left:4px solid var(--pine)">
       <div class="k">시도 2 · 규칙+LLM 하이브리드 (채택)</div>
-      <h3>어떻게 풀었나</h3>
+      <h3>해결 방법</h3>
       <ul>
         <li><b>명확한 입력은 규칙으로</b> 즉시 분기, <b>애매한 자연어만 LLM</b>에 위임</li>
         <li>예약 전/후(phase)로 <b>후보 에이전트를 제한</b> → 해당 단계에 없는 에이전트로의 오분류를 구조적으로 차단</li>
@@ -223,8 +251,7 @@
       </ul>
     </div>
   </div>
-  <div class="note" style="background:#eef6f3;border-color:#bfe3d8;color:var(--pine-dark)">
-    ✅ 결과 — 약 <b>1,000건 종합 QA에서 E2E 라우팅 정확도 100%</b>, 평균 <b>3.7턴</b>으로 간결하게 대화 완료. 위험 카테고리 안전성 판정 <b>fail 0건</b>.
+  <div class="result"><span class="k">결과</span><p>약 <b>1,000건 종합 QA에서 E2E 라우팅 정확도 100%</b>, 평균 <b>3.7턴</b>으로 간결하게 대화 완료. 위험 카테고리 안전성 판정 <b>fail 0건</b>.</p>
   </div>
 </div></section>
 
@@ -235,7 +262,7 @@
   <div class="grid2">
     <div class="card"><div class="k">01 · MULTI-AGENT</div><h3>멀티에이전트 오케스트레이션</h3>
       <ul><li>규칙 + LLM <b>하이브리드 라우팅</b> 설계 (명확=규칙 / 애매=LLM)</li>
-      <li>예약 전/후(phase)로 후보 제한 → 오분류 방지</li>
+      <li>예약 전/후(phase)로 후보 제한 → 해당 단계에 없는 에이전트로의 오분류 차단</li>
       <li>SessionContext로 멀티턴 상태 영속화</li>
       <li>후반 운영기에는 Follow-up Filter 에이전트를 담당</li></ul></div>
     <div class="card"><div class="k">02 · RAG</div><h3>RAG 문진 + 할루시네이션 방어</h3>
@@ -243,7 +270,7 @@
       <li>유사도 <b>0.60 임계값</b> · LLM 쿼리 확장(확장 실패 시 원래 질문으로 검색)</li>
       <li>3중 방어: 임계값 + RAGAS + CI 게이트</li></ul></div>
     <div class="card"><div class="k">03 · UX</div><h3>보호자 앱 UX · 응급 대화</h3>
-      <ul><li>동료가 잡아둔 초기 UI를 <b>보호자 화면 최종본으로 리디자인</b> + 전체 UX 설계</li>
+      <ul><li>동료가 구현한 초기 UI를 <b>보호자 화면 최종본으로 리디자인</b> + 전체 UX 설계</li>
       <li>기계적 "병원 가세요" 대신 <b>공감 → 즉시 내원 → 빠른 예약 제안</b></li>
       <li>안전 회귀(진단 단정·자가처치) <b>0건</b> 유지</li></ul></div>
     <div class="card"><div class="k">04 · EVALUATION</div><h3>평가 자동화 · 품질 검증</h3>
@@ -278,7 +305,7 @@
 <section id="shots"><div class="wrap">
   <div class="eyebrow">Screens</div>
   <div class="h2">실제 서비스 화면</div>
-  <p class="lead">라이브 서비스(*.medipaw.app)에서 데모 데이터로 캡처. 이미지를 클릭하면 확대됩니다.</p>
+  <p class="lead">운영 당시 라이브 서비스(*.medipaw.app)에서 데모 데이터로 캡처. 이미지를 클릭하면 확대됩니다.</p>
 
   <div class="galtitle">전체 데모 영상 (2분 41초)</div>
   <video controls muted playsinline preload="none"
@@ -291,14 +318,14 @@
   <div class="galtitle">핵심 화면</div>
   <div class="shots">
     <div class="shot big"><img loading="lazy" src="images/medipaw/12c-chatbot-conversation.webp" alt="보호자 AI 응급 상담"/><div class="cap"><b>보호자 AI 응급 상담</b> — "밥을 안 먹고 토해요" → 공감 + 즉시 내원 + 빠른 예약 제안</div></div>
-    <div class="shot"><img loading="lazy" src="images/medipaw/23-admin-eval-dashboard.webp" alt="운영자 AI 평가 대시보드"/><div class="cap"><b>운영자 AI 평가 대시보드</b> — 에이전트별 PASS/WARN · 점수 추이<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
+    <div class="shot"><img loading="lazy" src="images/medipaw/23-admin-eval-dashboard.webp" alt="운영자 AI 평가 대시보드"/><div class="cap"><b>운영자 AI 평가 대시보드</b> — 에이전트별 PASS/WARN · 점수 추이<br><b>Overall score 93.7%</b> = 라우팅·문진·예약·차트 응답의 자동 평가 통합 점수<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/32-vet-emr.webp" alt="수의사 EMR"/><div class="cap"><b>수의사 EMR</b> — 접수/대기 · 사전문진 · 처방전 자동 생성</div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/31-vet-dashboard.webp" alt="수의사 대시보드"/><div class="cap"><b>수의사 대시보드</b> — 오늘의 진료 + 응급도 분류</div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/01-company-marketing.webp" alt="서비스 랜딩"/><div class="cap"><b>서비스 랜딩</b> — 제품 소개 · 워크플로우 · 팀<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
   </div>
 
   <div class="galtitle">🐶 보호자 앱</div>
-  <div class="shots">
+  <div class="shots compact">
     <div class="shot"><img loading="lazy" src="images/medipaw/11-guardian-home.webp" alt="보호자 홈"/><div class="cap"><b>홈</b> — 반려동물 관리 · 상담/예약 진입</div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/13-guardian-hospitals.webp" alt="병원 찾기"/><div class="cap"><b>병원 찾기</b> — 검색 · 관심/주치 병원<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/14-guardian-reservations.webp" alt="예약 내역"/><div class="cap"><b>예약 내역</b> — 조회 · 변경 · 취소<span class="hint">클릭 시 전체 화면 ↗</span></div></div>
@@ -306,7 +333,7 @@
   </div>
 
   <div class="galtitle">🩺 수의사 앱</div>
-  <div class="shots">
+  <div class="shots compact">
     <div class="shot"><img loading="lazy" src="images/medipaw/33-vet-patients.webp" alt="환자 관리"/><div class="cap"><b>환자 관리</b> — 환자 검색·진료 이력</div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/34-vet-reservation.webp" alt="예약 관리"/><div class="cap"><b>예약 관리</b> — 일/주/월 일정</div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/35-vet-hospital-manage.webp" alt="병원 관리"/><div class="cap"><b>병원 관리</b> — 프로필·의료진·운영시간</div></div>
@@ -314,7 +341,7 @@
   </div>
 
   <div class="galtitle">🏢 운영자 웹</div>
-  <div class="shots">
+  <div class="shots compact">
     <div class="shot"><img loading="lazy" src="images/medipaw/21-admin-applications.webp" alt="입점 심사"/><div class="cap"><b>입점 심사</b> — 신청 승인/반려</div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/22-admin-hospitals.webp" alt="병원 관리"/><div class="cap"><b>병원 관리</b> — 병원·의료진·활성 상태</div></div>
     <div class="shot"><img loading="lazy" src="images/medipaw/24-admin-contacts.webp" alt="고객 문의"/><div class="cap"><b>고객 문의</b> — 조회·이메일 답변</div></div>

@@ -347,8 +347,40 @@ nav {
 .mini-card .project-bullets { margin-bottom: 12px; }
 .section-tight { padding-top: 56px; }
 
+/* 정보 위계 — Featured > Other Projects > Experience > Research */
+.hero { padding: 64px 0 72px; grid-template-columns: 1fr 280px; }
+section { padding: 64px 0; }
+.feature-name { font-size: 30px; font-weight: 800; color: var(--text-title); letter-spacing: -0.5px; line-height: 1.25; }
+.feature-sub { font-size: 17px; font-weight: 600; color: var(--text-body); margin: 2px 0 10px; }
+.feature .project-meta { margin-bottom: 14px; }
+.feature-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 24px 0 4px; }
+.feature-stats .stat { padding: 16px 10px; }
+.feature-stats .stat .n { font-size: 26px; }
+.feature-stats .stat .l { font-size: 12.5px; }
+.feature .scope { border-top: none; padding-top: 0; font-size: 14px; line-height: 1.8; margin-bottom: 20px; }
+.feature .bullet-label { margin-top: 22px; }
+
+.mini-card { display: flex; flex-direction: column; }
+.mini-card > .badge-alert { align-self: flex-start; }
+.mini-card .tech-stack { margin-top: auto; padding-top: 12px; }
+
+#experience .sec-title, #research .sec-title { font-size: 22px; }
+#experience .sec-desc, #research .sec-desc { font-size: 14.5px; margin-bottom: 20px; }
+.exp-list { gap: 0; }
+.exp-item { grid-template-columns: 150px 1fr; gap: 20px; padding: 16px 0; }
+.exp-item:last-child { padding-bottom: 0; }
+.exp-period { font-size: 13px; padding-top: 2px; }
+.exp-content h4 { font-size: 16px; margin-bottom: 4px; }
+.exp-content p { font-size: 14px; }
+.research-card { padding: 22px 24px; }
+.research-card h3 { font-size: 17px; }
+.research-abstract { font-size: 14px; padding: 16px; }
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
+  .feature { padding: 22px 18px; }
+  .feature-name { font-size: 26px; }
+  .feature-stats { grid-template-columns: repeat(2, 1fr); }
   nav { flex-wrap: wrap; gap: 12px; }
   .nav-links { flex-wrap: wrap; gap: 8px 16px; }
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 0; }
@@ -357,8 +389,14 @@ nav {
   .project-card { margin-bottom: 60px; }
 }
 
+@media (max-width: 768px) {
+  .exp-item { gap: 4px; }
+}
+
 /* PRINT (PDF 제출용) */
 .print-links { display: none; }
+/* 웹에서는 상세 페이지로 넘기고, 제출용 PDF에서만 MediPaw 결정 과정·평가를 보여준다 */
+.print-only { display: none; }
 
 @media print {
   @page { size: A4; margin: 12mm 14mm; }
@@ -412,6 +450,14 @@ nav {
   .badge-award, .badge-alert { margin-bottom: 8px; }
 
   /* Featured 카드 압축 */
+  .feature-name { font-size: 22px; }
+  .feature-sub { font-size: 14px; margin-bottom: 6px; }
+  .feature-stats { margin: 12px 0 4px; grid-template-columns: repeat(4, 1fr); }
+  .feature-stats .stat .n { font-size: 18px; }
+  .feature-stats .stat .l { font-size: 10px; }
+  .feature .scope { font-size: 12px; margin-bottom: 10px; }
+  .bullet-label { break-after: avoid; }
+  .feature .scope { break-before: avoid; break-inside: avoid; }
   .feature { padding: 16px 18px; border-radius: 12px; }
   .feature h3 { font-size: 20px; margin-bottom: 4px; }
   .feature .project-img { margin-top: 10px; box-shadow: none; }
@@ -494,6 +540,7 @@ nav {
 
   /* 마지막 장 — 전체 링크 모음 */
   .print-links { display: block; }
+  .print-only { display: block; }
 }
 </style>
 </head>
@@ -503,9 +550,9 @@ nav {
   <nav>
     <a href="#" class="logo">Chanyoung Kim</a>
     <div class="nav-links">
+      <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#research">Research</a>
-      <a href="#projects">Projects</a>
       <a href="https://github.com/Chyoung812" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/%EC%B0%AC%EC%98%81-%EA%B9%80-ba470812b/" target="_blank">LinkedIn</a>
       <a href="https://velog.io/@ch_luminous/posts" target="_blank">Velog</a>
@@ -532,81 +579,36 @@ nav {
     </div>
   </header>
 
-  <section id="experience">
-    <h2 class="sec-title">Experience</h2>
-    <p class="sec-desc">생화학 연구에서 시작해 바이오 실무를 거쳐 AI 서비스 개발로 이어진 경력입니다.</p>
-    
-    <div class="exp-list">
-      <div class="exp-item">
-        <div class="exp-period">2025.12 — 2026.06</div>
-        <div class="exp-content">
-          <h4>SK네트웍스 패밀리 AI 캠프 · AI 엔지니어</h4>
-          <p>PyTorch·LLM 기반 실무 프로젝트에서 RAG, 멀티에이전트, LLM 평가 흐름을 end-to-end로 구현했습니다. 바이오 텍스트를 근거 기반 AI 서비스로 연결하는 API/DB/배포 파이프라인 설계에도 참여했습니다.</p>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-period">2024.11 — 2025.09</div>
-        <div class="exp-content">
-          <h4>다인바이오 · 전략기획팀 학술 지원 및 마케팅</h4>
-          <p>Roche사 qPCR 장비 고객의 실험 문제(Ct 이상, 비특이 증폭 등)를 원인별로 분석하고 프로토콜 최적화 가이드를 제공했습니다. 제품별 판매 실적(YoY)을 분석해 고객 수요 변화와 부진 원인을 도출했습니다.</p>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-period">2022.07 — 2023.08</div>
-        <div class="exp-content">
-          <h4>티카로스 (Ticaros) · POC팀 연구원</h4>
-          <p>CAR-T 세포치료제 전주기 파이프라인 수행 (Cloning, Viral vector 생산, T-cell Transduction), FACS 기반 세포 품질 분석 및 동물 모델 효능 검증</p>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-period">2020.03 — 2022.02</div>
-        <div class="exp-content">
-          <h4>경북대학교 대학원 · 생화학 석사 (후생유전학 전공)</h4>
-          <p>비주류 모델(Xenopus laevis)의 실험 프로토콜을 구축하고 섬모 운동성을 정량 분석했습니다 (GPA 4.2 / 4.3). 실험 조건과 결과를 구분해 검증하는 경험이 이후 AI 응답 평가와 실패 케이스 분석으로 이어졌습니다.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="research">
-    <h2 class="sec-title">Research</h2>
-    <p class="sec-desc">SCI(E) 국제 학술지에 게재된 대표 연구 성과입니다.</p>
-    
-    <div class="research-card">
-      <div class="research-meta">Development & Reproduction · 2023.09.30 게재</div>
-      <h3>Ruvbl1 is Essential for Ciliary Beating during Xenopus laevis Embryogenesis</h3>
-      <p class="research-authors"><strong>Chan Young Kim*</strong>, Hyun-Kyung Lee*, Hongchan Lee, Hyun-Shik Lee (*Co-first author)</p>
-      <p class="research-abstract">
-        Xenopus laevis 배아 모델을 활용하여 다섬모세포에서 Ruvbl1의 기능을 분석한 연구입니다. Ruvbl1 유전자 결손 시 섬모의 형태는 유지되지만 기저소체 극성(basal body polarity)이 선택적으로 교란되어 유체 흐름이 현저히 감소함을 확인했습니다.
-        <b>공동 1저자로 실험 프로토콜 구축과 섬모 운동성 정량 분석에 참여했습니다.</b>
-      </p>
-      <div style="margin-top: 20px;">
-        <a href="https://doi.org/10.12717/DR.2023.27.3.159" target="_blank" class="github-link">논문 전문 보기 (DOI) →</a>
-      </div>
-    </div>
-  </section>
-
   <section id="projects">
     <h2 class="sec-title" style="margin-bottom:32px;">Featured Project</h2>
 
     <div class="feature">
       <div class="badge-award">🏆 SK네트웍스 패밀리 AI 캠프 최종 프로젝트 1위</div>
-      <h3>MediPaw 🐾 — LLM 멀티에이전트 동물병원 워크플로우 자동화</h3>
+      <h3 class="feature-name">MediPaw 🐾</h3>
+      <p class="feature-sub">LLM 멀티에이전트 동물병원 워크플로우 자동화</p>
       <div class="project-meta">PM(5인) · LangGraph 라우팅 · RAG 문진 · LLMOps 평가 · AWS 배포 · 2026.04 – 06.26</div>
-      <p class="lead-line">전화 예약과 종이 문진에 머물던 동물병원을, <b>보호자의 말 한마디로 상담부터 진료 기록까지 이어지는 하나의 AI 워크플로우</b>로 만들었습니다.</p>
+      <p class="lead-line">전화 예약·종이 문진으로 운영되는 동물병원의 진료 흐름을, <b>보호자의 말 한마디로 상담부터 진료 기록까지 이어지는 하나의 AI 워크플로우</b>로 만들었습니다.</p>
       <div class="pipeline">
         <span>상담</span><i>→</i><span>문진</span><i>→</i><span>예약</span><i>→</i><span>진료·처방 기록</span><i>→</i><span>경과관리</span>
       </div>
-      <p class="scope">
-        <b>직접 구현 ① 워크플로우·웹앱</b> — 보호자·수의사·운영자 3개 웹앱과 진료 여정 전체 흐름<br>
-        <b>② RAG·멀티에이전트</b> — LangGraph 하이브리드 라우팅 · pgvector 기반 RAG 문진<br>
-        <b>③ 평가·배포</b> — LLMOps 평가 대시보드 · pytest/GitHub Actions 회귀 게이트 · AWS 배포
-      </p>
       <div class="project-img">
         <img src="images/medipaw/demo-poster.webp" alt="MediPaw AI 상담 — 라우터가 증상을 알아채 문진 에이전트로 연결" onerror="this.style.display='none'">
       </div>
       <div class="project-cap">▲ <b>AI 상담 · 멀티에이전트 라우팅</b> — <span class="cap-flow">보호자 발화 <i>→</i> 라우터가 증상 인식 <i>→</i> 문진(Triage) 에이전트 호출 <i>→</i> 첨부 사진을 문진 보조 정보로 요약</span></div>
 
+      <div class="stat-row feature-stats">
+        <div class="stat"><div class="n">6</div><div class="l">AI 에이전트</div></div>
+        <div class="stat"><div class="n">124</div><div class="l">REST API 엔드포인트</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l">E2E 라우팅 정확도</div></div>
+        <div class="stat"><div class="n">3.7턴</div><div class="l">평균 대화 완료</div></div>
+      </div>
+      <div class="bullet-label">핵심 구현</div>
+      <p class="scope">
+        <b>직접 구현 ① 워크플로우·웹앱</b> — 보호자 웹앱을 주로 맡아, 수의사·운영자 웹앱까지 이어지는 진료 여정 흐름 구현<br>
+        <b>② RAG·멀티에이전트</b> — LangGraph 하이브리드 라우팅 · pgvector 기반 RAG 문진<br>
+        <b>③ 평가·배포</b> — LLMOps 평가 대시보드 · pytest/GitHub Actions 회귀 게이트 · AWS 배포
+      </p>
+      <div class="print-only">
       <div class="decision">
         <div class="decision-label">가장 오래 고민한 문제 — <span>사용자의 요청을 어느 에이전트가 처리할까</span> (라우팅)</div>
         <div class="decision-steps">
@@ -629,7 +631,7 @@ nav {
         </div>
         <div class="decision-result">
           <span class="dr-k">결과</span>
-          <p>규칙으로 판별되는 요청은 <strong>LLM 호출 없이 즉시</strong> 처리되고, 애매한 발화만 LLM이 판단하도록 구조를 단순화했습니다. <strong>LLM 호출 범위를 줄여 지연·비용 증가 가능성을 낮췄고</strong>, 오분류도 함께 줄었습니다.</p>
+          <p>규칙으로 판별되는 요청은 <strong>LLM 호출 없이 즉시</strong> 처리하고, 애매한 발화만 LLM이 판단하도록 했습니다. 그 결과 <strong>불필요한 LLM 호출을 줄여 지연·비용 증가 가능성을 낮추면서</strong>, 라우팅 오분류도 줄였습니다.</p>
         </div>
       </div>
 
@@ -644,6 +646,7 @@ nav {
         <li><strong>② LLMOps 평가</strong> — 위 라우팅 평가셋을 포함한 <strong>약 1,000건을 출처 인용·faithfulness·안전성 기준으로 자동 평가</strong>하고 대시보드에서 회귀 추적 → PetEVAL 기반 E2E 200건 중 문진 완료 199/200</li>
         <li><strong>③ 배포·운영 자동화</strong> — AWS·Docker·Caddy 자동 HTTPS로 배포 환경을 구성하고, GitHub Actions에서 회귀 테스트 실패 시 merge를 차단</li>
       </ul>
+      </div>
       <div class="tech-stack">
         <span class="tech-tag">LangGraph</span><span class="tech-tag">FastAPI</span><span class="tech-tag">RAG·pgvector</span><span class="tech-tag">Langfuse</span><span class="tech-tag">React·TS</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Docker</span><span class="tech-tag">AWS</span><span class="tech-tag">GitHub Actions</span>
       </div>
@@ -731,11 +734,65 @@ nav {
 
   <section id="foundations" class="section-tight">
     <h2 class="sec-title" style="font-size:20px;">기초 프로젝트</h2>
-    <p class="sec-desc" style="font-size:14px; margin-bottom:16px;">
-      부트캠프 초기 데이터 수집·전처리·모델링 기초를 다진 프로젝트입니다.
-      <b>OULAD 학습 이탈 예측</b> — Logistic Regression 모델링·군집 분석과 대시보드 시각화 ·
-      <b>지자체 유형별 자동차 분포 분석</b> — KLACI 데이터 크롤링·전처리 후 Streamlit 대시보드 시각화.
-    </p>
+    <p class="sec-desc" style="font-size:14px; margin-bottom:12px;">부트캠프 초기 데이터 수집·전처리·모델링 기초를 다진 프로젝트입니다.</p>
+    <ul class="project-bullets" style="margin-bottom:0;">
+      <li><b>OULAD 학습 이탈 예측</b> — Logistic Regression 모델링·군집 분석과 대시보드 시각화</li>
+      <li><b>지자체 유형별 자동차 분포 분석</b> — KLACI 데이터 크롤링·전처리 후 Streamlit 대시보드 시각화</li>
+    </ul>
+  </section>
+
+  <section id="experience">
+    <h2 class="sec-title">Experience</h2>
+    <p class="sec-desc">생화학 연구에서 시작해 바이오 실무를 거쳐 AI 서비스 개발로 이어진 경력입니다.</p>
+    
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-period">2025.12 — 2026.06</div>
+        <div class="exp-content">
+          <h4>SK네트웍스 패밀리 AI 캠프 · AI 엔지니어</h4>
+          <p>PyTorch·LLM 기반 실무 프로젝트에서 RAG, 멀티에이전트, LLM 평가 흐름을 end-to-end로 구현했습니다. 바이오 텍스트를 근거 기반 AI 서비스로 연결하는 API/DB/배포 파이프라인 설계에도 참여했습니다.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-period">2024.11 — 2025.09</div>
+        <div class="exp-content">
+          <h4>다인바이오 · 전략기획팀 학술 지원 및 마케팅</h4>
+          <p>Roche사 qPCR 장비 고객의 실험 문제(Ct 이상, 비특이 증폭 등)를 원인별로 분석하고 프로토콜 최적화 가이드를 제공했습니다. 제품별 판매 실적(YoY)을 분석해 고객 수요 변화와 부진 원인을 도출했습니다.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-period">2022.07 — 2023.08</div>
+        <div class="exp-content">
+          <h4>티카로스 (Ticaros) · POC팀 연구원</h4>
+          <p>CAR-T 세포치료제 전주기 파이프라인 수행 (Cloning, Viral vector 생산, T-cell Transduction), FACS 기반 세포 품질 분석 및 동물 모델 효능 검증</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-period">2020.03 — 2022.02</div>
+        <div class="exp-content">
+          <h4>경북대학교 대학원 · 생화학 석사 (후생유전학 전공)</h4>
+          <p>비주류 모델(Xenopus laevis)의 실험 프로토콜을 구축하고 섬모 운동성을 정량 분석했습니다 (GPA 4.2 / 4.3). 실험 조건과 결과를 구분해 검증하는 경험이 이후 AI 응답 평가와 실패 케이스 분석으로 이어졌습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <h2 class="sec-title">Research</h2>
+    <p class="sec-desc">SCI(E) 국제 학술지에 게재된 대표 연구 성과입니다.</p>
+    
+    <div class="research-card">
+      <div class="research-meta">Development & Reproduction · 2023.09.30 게재</div>
+      <h3>Ruvbl1 is Essential for Ciliary Beating during Xenopus laevis Embryogenesis</h3>
+      <p class="research-authors"><strong>Chan Young Kim*</strong>, Hyun-Kyung Lee*, Hongchan Lee, Hyun-Shik Lee (*Co-first author)</p>
+      <p class="research-abstract">
+        Xenopus laevis 배아 모델을 활용하여 다섬모세포에서 Ruvbl1의 기능을 분석한 연구입니다. Ruvbl1 유전자 결손 시 섬모의 형태는 유지되지만 기저소체 극성(basal body polarity)이 선택적으로 교란되어 유체 흐름이 현저히 감소함을 확인했습니다.
+        <b>공동 1저자로 실험 프로토콜 구축과 섬모 운동성 정량 분석에 참여했습니다.</b>
+      </p>
+      <div style="margin-top: 20px;">
+        <a href="https://doi.org/10.12717/DR.2023.27.3.159" target="_blank" class="github-link">논문 전문 보기 (DOI) →</a>
+      </div>
+    </div>
   </section>
 
   <section class="print-links" id="links">

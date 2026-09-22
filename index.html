@@ -563,9 +563,9 @@ section { padding: 64px 0; }
     <div class="hero-text">
       <h1>Bio × AI Engineer</h1>
       <p>
-        생화학 석사와 CAR-T 세포치료제 연구를 거쳐, <b>바이오 연구와 헬스케어 실무 경험을 바탕으로 AI 서비스를 구현하는 엔지니어</b>입니다.
-        논문·질병·약물처럼 근거가 중요한 바이오·헬스케어 정보를 다루며, <b>근거를 함께 제시하고 검증하는 RAG·멀티에이전트 기반 AI 서비스</b>를 구현해왔습니다.
-        동물병원 상담–문진–예약 흐름에서 RAG 기반 문진, 멀티에이전트 라우팅, LLMOps 평가 대시보드까지 구현했습니다.
+        생화학 석사, CAR-T 세포치료제 연구원, 바이오 학술 지원을 거쳐 AI 서비스를 만들고 있습니다.
+        논문·질병·약물처럼 근거가 중요한 정보를 다룰 때는 <b>답변에 근거를 붙이고, 평가셋으로 결과를 확인합니다.</b>
+        동물병원 상담–문진–예약 흐름을 연결한 MediPaw에서는 멀티에이전트 라우팅, RAG 기반 문진, 평가 자동화를 맡았습니다.
       </p>
       <div class="hero-links">
         <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
@@ -587,7 +587,7 @@ section { padding: 64px 0; }
       <h3 class="feature-name">MediPaw 🐾</h3>
       <p class="feature-sub">LLM 기반 멀티에이전트 동물병원 워크플로우 자동화</p>
       <div class="project-meta">PM(5인) · LangGraph 라우팅 · RAG 기반 문진 · LLMOps 평가 · AWS 배포 · 2026.04 – 06.26</div>
-      <p class="lead-line">전화 예약과 종이 문진 중심의 동물병원 진료 흐름을, <b>보호자의 말 한마디로 상담부터 진료 기록까지 이어지는 하나의 AI 워크플로우</b>로 만들었습니다.</p>
+      <p class="lead-line">전화 예약과 종이 문진으로 운영되는 동물병원에서는 상담·문진·예약·진료 기록이 서로 끊겨 있습니다. <b>보호자의 말 한마디가 상담부터 진료 기록까지 이어지도록</b> 하나의 AI 워크플로우로 연결했습니다.</p>
       <div class="pipeline">
         <span>상담</span><i>→</i><span>문진</span><i>→</i><span>예약</span><i>→</i><span>진료·처방 기록</span><i>→</i><span>경과관리</span>
       </div>
@@ -599,14 +599,14 @@ section { padding: 64px 0; }
       <div class="stat-row feature-stats">
         <div class="stat"><div class="n">6</div><div class="l">AI 에이전트</div></div>
         <div class="stat"><div class="n">124</div><div class="l">REST API 엔드포인트</div></div>
-        <div class="stat"><div class="n">100%</div><div class="l">E2E 라우팅 정확도</div></div>
+        <div class="stat"><div class="n">10/10</div><div class="l">채팅·예약 E2E 라우팅 판정</div></div>
         <div class="stat"><div class="n">3.7턴</div><div class="l">평균 문진 완료 턴</div></div>
       </div>
-      <div class="bullet-label">핵심 구현</div>
+      <div class="bullet-label">맡은 부분 (PM · 5인 팀)</div>
       <p class="scope">
-        <b>직접 구현 ① 워크플로우·웹앱</b> — 보호자 웹앱을 주로 맡아, 수의사·운영자 웹앱까지 이어지는 진료 여정 흐름 구현<br>
-        <b>② RAG·멀티에이전트</b> — LangGraph 기반 하이브리드 라우팅 · RAG 기반 문진(pgvector)<br>
-        <b>③ 평가·배포</b> — LLMOps 평가 대시보드 · pytest/GitHub Actions 기반 CI 게이트 · AWS 배포
+        <b>① 라우팅·RAG</b> — 규칙+LLM 하이브리드 라우팅 설계(LangGraph) · pgvector 기반 문진 RAG 초기 설계<br>
+        <b>② 워크플로우·웹앱</b> — 보호자 앱 리디자인과 UX 설계 · 상담 → 예약 → EMR → 처방으로 이어지는 흐름 구현<br>
+        <b>③ 평가·배포</b> — 평가 자동화와 LLMOps 대시보드 · pytest/GitHub Actions CI 게이트 · AWS 배포
       </p>
       <div class="print-only">
       <div class="decision">
@@ -617,21 +617,21 @@ section { padding: 64px 0; }
             <p>사용자의 요청을 처음에 <strong>잘못 분류하면</strong>, 이후 문진·예약·진료 기록 흐름까지 전부 잘못 이어집니다.</p>
           </div>
           <div class="decision-step">
-            <div class="step-k">대안 · 순수 LLM</div>
+            <div class="step-k">처음 방식 · 순수 LLM</div>
             <p>모든 발화를 LLM이 분류하니, 비슷한 요청(“예약 바꿀래요” vs “예약 전에 뭐 좀 물어볼게요”)을 <strong>매번 다르게 분류</strong>했습니다. 실제로 <strong>“예약 변경” 요청이 문진 상담으로 넘어가</strong>, 보호자가 증상 질문에 답하다 예약을 못 바꾸는 흐름이 생겼습니다. 호출마다 지연·비용도 쌓였습니다.</p>
           </div>
           <div class="decision-step pick">
             <div class="step-k">선택 · 규칙+LLM</div>
-            <p>버튼·예약슬롯처럼 <strong>정형 입력은 deterministic rule</strong>로 즉시 처리하고, <strong>자유 발화만 LLM router</strong>가 판단합니다. ‘예약 전’ 단계에선 ‘예약 변경’ 같은 <strong>후보 에이전트를 빼</strong>, 라우터의 오분류 가능성을 구조적으로 제한했습니다.</p>
+            <p>버튼·예약 슬롯처럼 <strong>정형 입력은 규칙</strong>으로 즉시 처리하고, <strong>자유 발화만 LLM 라우터</strong>가 판단합니다. ‘예약 전’ 단계에선 ‘예약 변경’ 같은 <strong>후보 에이전트를 빼</strong>, 라우터의 오분류 가능성을 구조적으로 제한했습니다.</p>
           </div>
           <div class="decision-step">
             <div class="step-k">검증</div>
-            <p>자체 구축 평가셋 <strong>약 1,000건</strong>(PetEVAL 200 + 합성 안전성 684 + 메모리 125 + E2E)으로 검증<br>· <strong>정의한 라우팅 평가셋 기준 오류 0건</strong><br>· 평균 <strong>3.7턴</strong> 만에 문진 완료(문진 시작~완료 턴 수, 짧을수록 좋음)<br>· 합성 안전성 684건 중 위험 답변 <strong>실패 0건</strong></p>
+            <p>자체 구축 평가셋 <strong>약 1,000건</strong>(PetEVAL 200 + 합성 안전성 684 + 메모리 125 + 채팅·예약 E2E 16)으로 검증<br>· <strong>채팅·예약 E2E 라우팅 판정 10건 모두 정답</strong><br>· 평균 <strong>3.7턴</strong> 만에 문진 완료(문진 시작~완료 턴 수, 짧을수록 좋음)<br>· 합성 안전성 684건 중 위험 답변 <strong>실패 0건</strong></p>
           </div>
         </div>
         <div class="decision-result">
           <span class="dr-k">결과</span>
-          <p>규칙으로 판별되는 요청은 <strong>LLM 호출 없이 즉시</strong> 처리하고, 애매한 발화만 LLM이 판단하도록 했습니다. 그 결과 <strong>불필요한 LLM 호출을 줄여 지연·비용 증가 가능성을 낮추면서</strong>, 라우팅 오분류 가능성도 함께 줄였습니다.</p>
+          <p>규칙으로 판별되는 요청은 <strong>LLM 호출 없이 즉시</strong> 처리합니다. LLM은 애매한 자유 발화에만 호출해, 턴마다 쌓이던 지연·비용을 줄였습니다.</p>
         </div>
       </div>
 
@@ -640,11 +640,12 @@ section { padding: 64px 0; }
       </div>
       <div class="project-cap">▲ <b>운영자용 LLMOps 평가 대시보드</b> — 케이스별 PASS/WARN 판정 · 종합 점수 추이 · Top WARN 자동 집계로 <span class="cap-flow">에이전트 품질을 지표 기반으로 회귀 추적</span><br><b>Overall score 93.7%</b> = 라우팅·문진·예약·차트 응답의 자동 평가 통합 점수</div>
 
-      <div class="bullet-label">그 밖에 직접 해결한 것</div>
+      <div class="bullet-label">그 밖에 맡은 것</div>
       <ul class="project-bullets">
-        <li><strong>① RAG 신뢰성</strong> — 할루시네이션 3중 방어(유사도 임계값 0.60 미만 차단 + RAGAS 평가 + CI 게이트)로 근거 없는 답변을 억제하고, 문진 후속 질문이 맥락에 맞게 이어지는 비율을 <strong>58 → 72%</strong>로 개선 (이전 문진 맥락과 관련 있는 후속 질문 수 / 전체 후속 질문 수)</li>
-        <li><strong>② LLMOps 평가</strong> — 위 라우팅 평가셋을 포함한 <strong>약 1,000건을 출처 인용·faithfulness·안전성 기준으로 자동 평가</strong>하고 대시보드에서 회귀 추적 → PetEVAL 기반 E2E 200건 중 문진 완료 199/200</li>
-        <li><strong>③ 배포·운영 자동화</strong> — AWS·Docker·Caddy 자동 HTTPS로 배포 환경을 구성하고, GitHub Actions에서 회귀 테스트 실패 시 merge를 차단</li>
+        <li><strong>① RAG 신뢰성</strong> — 유사도 0.60 미만 상담 사례는 문진 근거에서 제외하고, RAGAS 평가와 CI 게이트로 근거 없는 답변을 걸러냄</li>
+        <li><strong>② 대화 품질</strong> — 대화 UX 개선 전후를 문진 평가셋 200건으로 비교: 이전 맥락과 이어지는 후속 질문 비율 <strong>58 → 72%</strong></li>
+        <li><strong>③ LLMOps 평가</strong> — <strong>약 1,000건을 출처 인용·faithfulness·안전성 기준으로 자동 평가</strong>하고 대시보드에서 회귀 추적 → PetEVAL 200건 중 문진 완료 199/200</li>
+        <li><strong>④ 배포·운영 자동화</strong> — AWS·Docker·Caddy 자동 HTTPS로 배포하고, GitHub Actions에서 회귀 테스트 실패 시 merge 차단</li>
       </ul>
       </div>
       <div class="tech-stack">
@@ -665,11 +666,11 @@ section { padding: 64px 0; }
       <div class="mini-card">
         <div class="badge-alert">Superb AI × BDAI 비전 해커톤 본선 진출</div>
         <h4>PATCH RUN 🏃 — 러닝 중 도로 파손 제보 서비스<span class="role-tag own">1인 개발</span></h4>
-        <p>러너·산책자가 길에서 찍은 도로 파손 사진을 AI가 1차 판별하고, 운영자가 승인하면 행정동별 보수 우선순위에 반영되는 서비스입니다. 차량·드론 영상 기반 자동 탐지 과제를, <b>러너가 직접 촬영하고 AI가 1차 판별하는 제보 구조</b>로 재설계했습니다.</p>
+        <p>차량·드론 영상으로 도로 파손을 자동 탐지하는 해커톤 과제를, <b>그 길을 지나는 러너·산책자의 제보</b>까지 확장했습니다. 순찰만으로는 이면도로까지 확인하기 어렵기 때문입니다. 제보 사진은 AI가 1차 판별하고, 운영자가 승인한 제보는 행정동별 보수 우선순위에 반영됩니다.</p>
         <ul class="project-bullets">
-          <li>RDD2022 2만여 장을 4,000장으로 큐레이션해 RF-DETR 객체 탐지 모델을 파인튜닝 — 학습에 쓰지 않은 홀드아웃 200장 기준 mAP@0.5 <strong>0.016(제로샷) → 0.29</strong></li>
-          <li>탐지 임계값은 F1이 최대가 되는 0.5로 설정해 운영자 검수 부담을 고려했고, 얼굴·번호판 블러는 누락 비용이 커 0.15로 낮게 설정</li>
           <li>촬영 → 도로 여부 → 파손 4종 탐지 → 비식별화 → 중복 판별(dHash·30m 반경·VLM 대조) → 운영자 승인까지 전체 파이프라인 구현</li>
+          <li>RDD2022 2만여 장을 4,000장으로 큐레이션해 RF-DETR 객체 탐지 모델을 파인튜닝 — 학습에 쓰지 않은 홀드아웃 200장 기준 mAP@0.5 <strong>0.016(제로샷) → 0.29</strong></li>
+          <li>파손 탐지 임계값은 오탐이 늘면 운영자 검수 건도 늘어나 F1이 최대인 0.5로, 얼굴·번호판 블러는 하나라도 놓치면 개인정보가 노출돼 0.15로 낮게 설정</li>
         </ul>
         <div class="tech-stack">
           <span class="tech-tag">RF-DETR</span><span class="tech-tag">Superb AI</span><span class="tech-tag">FastAPI</span><span class="tech-tag">Next.js</span><span class="tech-tag">Supabase</span><span class="tech-tag">Vercel</span>
@@ -700,10 +701,10 @@ section { padding: 64px 0; }
       <div class="mini-card">
         <div class="badge-alert">보건의료빅데이터 AI 창업경진대회 출품작</div>
         <h4>보약 (Boyak) 💊 — 시니어 헬스케어 서비스<span class="role-tag led">PM</span></h4>
-        <p>약물 부작용, 병원비, 이동 장벽을 한 화면에서 확인할 수 있도록 OCR·공공데이터·무장애 길찾기를 연결한 서비스입니다. OCR·공공데이터·길찾기 API를 결합한 프로토타입을 구현해 창업경진대회에 출품했습니다.</p>
+        <p>시니어가 약물 부작용, 병원비, 이동 장벽을 한 화면에서 확인하도록 OCR·공공데이터·무장애 길찾기를 연결한 프로토타입입니다.</p>
         <ul class="project-bullets">
-          <li>약봉투 OCR + 심평원 DUR 공공데이터를 연동해 약물 안전성 분석</li>
-          <li>TMap 무장애 보행 API로 계단 수 최소화 길찾기 구현</li>
+          <li>약봉투를 OCR로 읽고 심평원 DUR 공공데이터와 대조해 약물 안전성 확인</li>
+          <li>TMap 무장애 보행 API로 계단이 적은 길을 안내</li>
         </ul>
         <div class="tech-stack">
           <span class="tech-tag">Python</span><span class="tech-tag">Next.js</span><span class="tech-tag">OpenAI API</span><span class="tech-tag">Render</span>
@@ -719,7 +720,7 @@ section { padding: 64px 0; }
         <p>건강 질문에 문헌·트렌드 근거를 함께 제시하는 RAG 챗봇입니다. <b>BioRAG에서 경험한 문헌 검색·청킹·근거 제시 방식을 MediPaw의 RAG 기반 문진 설계에 적용했습니다.</b></p>
         <ul class="project-bullets">
           <li>LangChain + Chroma DB 기반 RAG 파이프라인 구축</li>
-          <li>검색 누락과 근거 없는 응답 사례를 확인하고, chunking·임베딩·벡터 검색 방식을 조정</li>
+          <li>검색 누락과 근거 없는 응답 사례를 확인하고, 청킹·임베딩·벡터 검색 방식을 조정</li>
         </ul>
         <div class="tech-stack">
           <span class="tech-tag">LangChain</span><span class="tech-tag">Chroma DB</span><span class="tech-tag">LLM</span>
@@ -749,8 +750,8 @@ section { padding: 64px 0; }
       <div class="exp-item">
         <div class="exp-period">2025.12 — 2026.06</div>
         <div class="exp-content">
-          <h4>SK네트웍스 패밀리 AI 캠프 · AI 엔지니어</h4>
-          <p>PyTorch·LLM 기반 실무 프로젝트에서 RAG, 멀티에이전트, LLM 평가 흐름을 end-to-end로 구현했습니다. 바이오 텍스트를 근거 기반 AI 서비스로 연결하는 API/DB/배포 파이프라인 설계에도 참여했습니다.</p>
+          <h4>SK네트웍스 패밀리 AI 캠프 · AI 엔지니어 과정</h4>
+          <p>BioRAG와 MediPaw 팀 프로젝트에서 RAG, 멀티에이전트, LLM 평가를 구현했습니다. 최종 프로젝트 MediPaw에서는 PM을 맡아 API·DB·AWS 배포까지 다뤘습니다.</p>
         </div>
       </div>
       <div class="exp-item">
@@ -764,7 +765,7 @@ section { padding: 64px 0; }
         <div class="exp-period">2022.07 — 2023.08</div>
         <div class="exp-content">
           <h4>티카로스 (Ticaros) · POC팀 연구원</h4>
-          <p>CAR-T 세포치료제 전주기 파이프라인 수행 (Cloning, Viral vector 생산, T-cell Transduction), FACS 기반 세포 품질 분석 및 동물 모델 효능 검증</p>
+          <p>회사 파이프라인에 따라 CD19, MUC1 등 여러 타깃의 CAR-T를 제작하고 평가했습니다. 프라이머 설계 → cloning(전기영동·외부 시퀀싱으로 확인) → midi prep → 바이러스 제작 → CAR-T 제작 순으로 진행하고, 제작 중 FACS로 purity를 확인했습니다. 완성된 CAR-T는 cytotoxicity·ELISA로 효능과 독성을 평가했고, 일부는 마우스에 주입해 IVIS로 종양 크기를 확인했습니다.</p>
         </div>
       </div>
       <div class="exp-item">
@@ -797,7 +798,7 @@ section { padding: 64px 0; }
 
   <section class="print-links" id="links">
     <h2 class="sec-title">Links &amp; Contact</h2>
-    <p class="sec-desc" style="color:var(--text-body); font-size:15px;">바이오 도메인 이해를 바탕으로, 근거를 제시하고 평가로 검증되는 헬스케어 AI 서비스를 구현하겠습니다.</p>
+    <p class="sec-desc" style="color:var(--text-body); font-size:15px;">연락처와 프로젝트 저장소 링크입니다.</p>
     <dl class="skills" style="display:grid; grid-template-columns:130px 1fr; gap:10px 16px; font-size:14px;">
       <dt style="font-weight:700; color:var(--text-title);">Email</dt>
       <dd><a href="mailto:kcy960812@gmail.com" class="pdf-link">kcy960812@gmail.com</a></dd>

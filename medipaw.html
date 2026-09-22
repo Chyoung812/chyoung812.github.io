@@ -183,7 +183,7 @@
     <div class="metric"><div class="num">123</div><div class="lbl">React 컴포넌트<br/>(3개 웹앱)</div></div>
     <div class="metric"><div class="num">6</div><div class="lbl">AI 에이전트</div></div>
     <div class="metric"><div class="num">142</div><div class="lbl">회귀 테스트<br/>+ CI 게이트</div></div>
-    <div class="metric"><div class="num">100%</div><div class="lbl">E2E 라우팅 정확도</div></div>
+    <div class="metric"><div class="num">10/10</div><div class="lbl">채팅·예약 E2E 라우팅 판정</div></div>
     <div class="metric"><div class="num">3.7턴</div><div class="lbl">평균 문진 완료 턴</div></div>
     <div class="metric"><div class="num">4.38</div><div class="lbl">종합 QA 평가<br/>(가중 평균 / 5)</div></div>
     <div class="metric"><div class="num">19,206</div><div class="lbl">RAG 기반 문진 문서</div></div>
@@ -251,7 +251,7 @@
       </ul>
     </div>
   </div>
-  <div class="result"><span class="k">결과</span><p>약 <b>1,000건 종합 QA에서 E2E 라우팅 정확도 100%</b>, 평균 <b>3.7턴</b>에 문진 완료. 위험 카테고리 안전성 판정 <b>fail 0건</b>.</p>
+  <div class="result"><span class="k">결과</span><p>채팅·예약 E2E의 <b>라우팅 판정 10건 모두 정답</b>, PetEVAL 200건 기준 평균 <b>3.7턴</b>에 문진 완료. 위험 카테고리 안전성 판정 <b>fail 0건</b>.</p>
   </div>
 </div></section>
 
@@ -274,8 +274,8 @@
       <li>기계적 "병원 가세요" 대신 <b>공감 → 즉시 내원 → 빠른 예약 제안</b></li>
       <li>안전성 회귀(진단 단정·자가처치) <b>0건</b> 유지</li></ul></div>
     <div class="card"><div class="k">04 · EVALUATION</div><h3>평가 자동화 · 품질 검증</h3>
-      <ul><li>약 <b>1,000건 종합 QA</b> 자동화 (PetEVAL 200 + 지식iN 안전성 684 + 메모리 125 + E2E)</li>
-      <li>→ <b>E2E 라우팅 정확도 100%</b> · 문진 완료 <b>199/200</b> · 평균 <b>3.7턴</b> · 종합 가중 <b>4.38/5</b></li>
+      <ul><li>약 <b>1,000건 종합 QA</b> 자동화 (PetEVAL 200 + 지식iN 안전성 684 + 메모리 125 + 채팅·예약 E2E 16)</li>
+      <li>→ 채팅·예약 E2E <b>라우팅 판정 10/10</b> · 문진 완료 <b>199/200</b> · 평균 <b>3.7턴</b> · 종합 가중 <b>4.38/5</b></li>
       <li>위험 카테고리(약물 투여·민간요법·학대) <b>LLM 안전성 판정 fail 0건</b> · 운영자 대시보드에서 품질 회귀 추적</li></ul></div>
     <div class="card"><div class="k">05 · FULL STACK</div><h3>상담 → 진료까지 이어지는 워크플로우</h3>
       <ul><li>SSE 스트리밍 채팅 → 예약 슬롯 → EMR → <b>처방전 자동 생성</b></li>
